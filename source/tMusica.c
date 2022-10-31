@@ -4,6 +4,6 @@ struct Musica {
     Artista_pt * ArrayArtistas;
     Data_pt ptData;
     int qtdArtistas, duracao, popularity, explicit, mode, time_signature;
-    float tempoo, danceability, energy, loudness, speechness, acoustiness, instrumentalness, liveness, valence;
+    float tempo, danceability, energy, loudness, speechness, acoustiness, instrumentalness, liveness, valence;
     char *id, *nome;
 };
