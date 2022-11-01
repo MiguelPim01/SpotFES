@@ -16,8 +16,10 @@ struct tMusica {
     char *id, *nome, *artistas, *id_artistas;
 };
 
-tMusica *LeMusica(char *buffer, tMusica *musica)
+tMusica *LeMusica(char *buffer)
 {
+    tMusica *musica = (tMusica *)malloc(sizeof(struct tMusica));
+    
     int dia, mes, ano;
     char id[TAM_ID], nome[50], artistas[100], id_artistas[200];
     

@@ -29,7 +29,7 @@ tMusicas *CarregaArquivoDeMusicas(FILE *pFile, tMusicas *m)
         }
         
         // Fazer a leitura da musica
-        m->musicas[qtdMusicas] = LeMusica(linha, m->musicas[qtdMusicas]);
+        m->musicas[qtdMusicas] = LeMusica(linha);
 
         // Incremento na quantidade de musicas
         qtdMusicas++;

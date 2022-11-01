@@ -3,4 +3,9 @@
 
 typedef struct tMusicas tMusicas;
 
+/*
+ * Recebe arquivo para leitura e retorna um ponteiro para todas as musicas
+ */
+tMusicas *CarregaArquivoDeMusicas(FILE *pFile, tMusicas *m);
+
 #endif
