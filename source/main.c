@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     fclose(pFileArtistas);
     fclose(pFileMusicas);
 
-    // Liberar espaço de memoria do heap
+    // -- Liberar espaço de memoria do heap --
 
     LiberaArrayMusicas(ArrayMusicas);
     LiberaArrayArtistas(ArrayArtistas);
