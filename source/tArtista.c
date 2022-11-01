@@ -1,6 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "tArtista.h"
 
-struct Artista {
+struct tArtista {
     char *id, *generos, *nome;
     int numSeguidores, popularidade;
 };

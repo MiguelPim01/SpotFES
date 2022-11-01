@@ -1,104 +1,67 @@
-#include "tMusica.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-struct Musica {
-    Artista_pt * ArrayArtistas;
-    Data_pt ptData;
+#include "tMusica.h"
+#include "tArtistas.h"
+#include "tData.h"
+
+#define TAM_ID 22
+
+struct tMusica {
+    tArtistas *arrayArtistas;
+    tData *data;
     int qtdArtistas, duracao_ms, popularity, explicit, mode, time_signature, key;
     float tempo, danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence;
     char *id, *nome, *artistas, *id_artistas;
 };
 
-Musica_pt *CarregaFileMusicas(FILE *pFileMusicas, Musica_pt *ArrayMusicas)
+tMusica *LeMusica(char *buffer, tMusica *musica)
 {
-    int EspacoMusicas=100, qtdMusicas=0;
-    char linha[1000]; // Armazena linha por linha do arquivo
-
-    // Alocando espaço inicial na memoria para array de musicas
-    ArrayMusicas = (Musica_pt *)malloc(EspacoMusicas*sizeof(Musica_pt));
-
-    while (fscanf(pFileMusicas, "%[^\n]\n", linha) == 1)
-    {
-        // Fazer a realocação de memoria se necessario
-        if (qtdMusicas >= EspacoMusicas)
-        {
-            EspacoMusicas = EspacoMusicas * 2;
-            ArrayMusicas = (Musica_pt *)realloc(ArrayMusicas, EspacoMusicas*sizeof(Musica_pt));
-        }
-
-        //Fazer malloc para a musica a ser lida
-        ArrayMusicas[qtdMusicas] = (Musica_pt)malloc(sizeof(Musica));
-
-        // Fazer a leitura do arquivo
-        ArrayMusicas[qtdMusicas] = LeMusica(ArrayMusicas[qtdMusicas], linha);
-
-        // Incrementa a quantidade de musicas
-        qtdMusicas++;
-    }
-
-    return ArrayMusicas;
-}
-
-Musica_pt LeMusica(Musica_pt mus, char *buffer)
-{
-    char nome[50], id[22], artistas[100], id_artistas[200];
-    Data *data;
+    int dia, mes, ano;
+    char id[TAM_ID], nome[50], artistas[100], id_artistas[200];
     
-    // Leitura da linha contendo a musica
-    sscanf(buffer, "%[^;];", id);
-    sscanf(buffer, "%[^;];", nome);
-    sscanf(buffer, "%d;", mus->popularity);
-    sscanf(buffer, "%d;", mus->duracao_ms);
-    sscanf(buffer, "%d;", mus->explicit);
-    sscanf(buffer, "%[^;];", artistas);
-    sscanf(buffer, "%[^;];", id_artistas);
-    data = LeData(buffer, data);
-    sscanf(buffer, "%f;", mus->danceability);
-    sscanf(buffer, "%f;", mus->energy);
-    sscanf(buffer, "%d;", mus->key);
-    sscanf(buffer, "%f;", mus->loudness);
-    sscanf(buffer, "%d;", mus->mode);
-    sscanf(buffer, "%f;", mus->speechiness);
-    sscanf(buffer, "%f;", mus->acousticness);
-    sscanf(buffer, "%f;", mus->instrumentalness);
-    sscanf(buffer, "%f\n", mus->liveness);
+    // Fazendo leitura da musica
+    sscanf(buffer, "%[^;]", id);
+    sscanf(buffer, ";%[^;]", nome);
+    sscanf(buffer, ";%d", &musica->popularity);
+    sscanf(buffer, ";%d", &musica->duracao_ms);
+    sscanf(buffer, ";%d", &musica->explicit);
+    sscanf(buffer, ";%[^;]", artistas);
+    sscanf(buffer, ";%[^;]", id_artistas);
+    
+    sscanf(buffer, ";%d-%d-%d", &ano, &mes, &dia);
+    musica->data = InicializaData(dia, mes, ano);
 
-    // Alocar variaveis restantes
-    int tam=0;
+    sscanf(buffer, ";%f", &musica->danceability);
+    sscanf(buffer, ";%f", &musica->energy);
+    sscanf(buffer, ";%d", &musica->key);
+    sscanf(buffer, ";%f", &musica->loudness);
+    sscanf(buffer, ";%d", &musica->mode);
+    sscanf(buffer, ";%f", &musica->speechiness);
+    sscanf(buffer, ";%f", &musica->acousticness);
+    sscanf(buffer, ";%f", &musica->instrumentalness);
+    sscanf(buffer, ";%f\n", &musica->liveness);
 
-    mus->id = (char *)malloc(TAM_ID*sizeof(char)+1); // Alocando o id
-    id[TAM_ID] = '\0';
+    // Atribuindo id, nome, artistas e id_artistas a musica
+    musica = FinalizaMusica(musica, id, nome, artistas, id_artistas);
 
-    tam = TamanhoString(nome);
-    nome[tam] = '\0';
-    mus->nome = (char *)malloc(tam*sizeof(char)+1); // Alocando o nome
-
-    tam = TamanhoString(artistas);
-    artistas[tam] = '\0';
-    mus->artistas = (char *)malloc(tam*sizeof(char)+1); // Alocando artistas
-
-    tam = TamanhoString(id_artistas);
-    id_artistas[tam] = '\0';
-    mus->id_artistas = (char *)malloc(tam*sizeof(char)+1); // Alocando id artistas
-
-    mus->ptData = AlocaData(); // Alocando data
-    *(mus->ptData) = *data;
-
-    strcpy(mus->id, id);
-    strcpy(mus->nome, nome);
-    strcpy(mus->artistas, artistas);
-    strcpy(mus->id_artistas, id_artistas);
-
-    return mus;
+    return musica;
 }
 
-static int TamanhoString(char *str)
+tMusica *FinalizaMusica(tMusica *musica, char *id, char *nome, char *artistas, char *id_artistas)
 {
-    int i=0;
+    // Alocando espaço para cada uma das strings
+    musica->id = (char *)malloc(strlen(id)*sizeof(char));
+    musica->nome = (char *)malloc(strlen(nome)*sizeof(char));
+    musica->artistas = (char *)malloc(strlen(artistas)*sizeof(char));
+    musica->id_artistas = (char *)malloc(strlen(id_artistas)*sizeof(char));
 
-    while (str[i] != ';')
-    {
-        i++;
-    }
+    // Passando as strings para a musica
+    strcpy(musica->id, id);
+    strcpy(musica->nome, nome);
+    strcpy(musica->artistas, artistas);
+    strcpy(musica->id_artistas, id_artistas);
 
-    return i;
+    return musica;
 }

@@ -1,5 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "tPlaylist.h"
 
-struct Playlist {
-    Musica_pt * ArrayMusicas;
+struct tPlaylist {
+    tMusica **ArrayMusicas;
 }
