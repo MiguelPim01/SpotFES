@@ -1,11 +1,11 @@
 #ifndef _TDATA_H_
 #define _TDATA_H_
 
-typedef struct tData tData;
+typedef struct tData Data;
 
 /*
  * Inicializa e faz a alocação da data a partir de parametros dados
  */
-tData *InicializaData(int dia, int mes, int ano);
+Data *InicializaData(int dia, int mes, int ano);
 
 #endif

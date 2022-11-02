@@ -7,9 +7,9 @@ struct tData {
     int dia, mes, ano;
 };
 
-tData *InicializaData(int dia, int mes, int ano)
+Data *InicializaData(int dia, int mes, int ano)
 {
-    tData *data = (tData *)malloc(sizeof(struct tData));
+    Data *data = (Data *)malloc(sizeof(Data));
 
     data->dia = dia;
     data->mes = mes;

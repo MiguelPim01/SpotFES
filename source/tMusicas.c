@@ -5,7 +5,7 @@
 #include "tMusica.h"
 
 struct tMusicas {
-    tMusica **musicas;
+    Musica **musicas;
 };
 
 Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m)

@@ -46,6 +46,8 @@ int main(int argc, char *argv[])
     musicas = CarregaArquivoMusicas(pFileMusicas, musicas);
 
     // Fechar arquivos
+    fclose(pFileArtistas);
+    fclose(pFileMusicas);
 
     // Liberar espaço da memoria
 

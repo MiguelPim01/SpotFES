@@ -5,5 +5,5 @@
 #include "tMusicas.h"
 
 struct tPlaylist {
-    tMusicas *ArrayMusicas;
+    Musicas *arrayMusicas;
 };

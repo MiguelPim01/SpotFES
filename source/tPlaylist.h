@@ -1,6 +1,6 @@
 #ifndef _TPLAYLIST_H_
 #define _TPLAYLIST_H_
 
-typedef struct tPlaylist tPlaylist;
+typedef struct tPlaylist Playlist;
 
 #endif

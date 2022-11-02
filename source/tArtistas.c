@@ -6,6 +6,7 @@
 
 struct tArtistas {
     Artista **artistas;
+    int qtd;
 };
 
 Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a) {
@@ -16,6 +17,7 @@ Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a) {
 
     // Aloca espaço para array de ponteiros de artista (conteúdo da struct artistas)
     a->artistas = (Artista **)malloc(multiplicador*sizeof(Artista *));
+    a->qtd = 0;
 
     char buffer[1000];
     while (fscanf(pFileArtistas, "%[^\n]\n", buffer) == 1) {
@@ -26,6 +28,7 @@ Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a) {
         }
         // Cria artista e bota no array de ponteiro de artista
         a->artistas[contArtistas] = CriaArtista(buffer);
+        a->qtd++;
 
         contArtistas++;
     }

@@ -10,7 +10,7 @@
 
 struct tMusica {
     Artistas *arrayArtistas;
-    tData *data;
+    Data *data;
     int qtdArtistas, duracao_ms, popularity, explicit, mode, time_signature, key;
     float tempo, danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence;
     char *id, *nome, *artistas, *id_artistas;
