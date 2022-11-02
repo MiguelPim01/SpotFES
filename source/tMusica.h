@@ -13,4 +13,9 @@ Musica *LeMusica(char *buffer);
  */
 void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *id_artistas);
 
+/*
+ * Libera o espaço alocado para uma musica da memoria
+ */
+void LiberaMusica(Musica *m);
+
 #endif

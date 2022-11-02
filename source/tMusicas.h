@@ -8,4 +8,9 @@ typedef struct tMusicas Musicas;
  */
 Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m);
 
+/*
+ * Libera o espaço alocado para musicas da memoria
+ */
+void LiberaMusicas(Musicas *m);
+
 #endif

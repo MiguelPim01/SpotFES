@@ -40,7 +40,6 @@ Musica *LeMusica(char *buffer)
     sscanf(buffer, ";%d", &musica->key);
     sscanf(buffer, ";%f", &musica->loudness);
     sscanf(buffer, ";%d", &musica->mode);
-    // VASCO DA GAMA
     sscanf(buffer, ";%f", &musica->speechiness);
     sscanf(buffer, ";%f", &musica->acousticness);
     sscanf(buffer, ";%f", &musica->instrumentalness);
@@ -65,4 +64,18 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
     strcpy(musica->nome, nome);
     strcpy(musica->artistas, artistas);
     strcpy(musica->id_artistas, id_artistas);
+}
+
+void LiberaMusica(Musica *m)
+{
+    // Liberando ponteiros que estao na struct
+    LiberaArtistas(m->arrayArtistas);
+    LiberaData(m->data);
+    free(m->id);
+    free(m->nome);
+    free(m->artistas);
+    free(m->id_artistas);
+
+    // Liberando o ponteiro que aponta para a struct
+    free(m);
 }

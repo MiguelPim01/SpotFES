@@ -8,4 +8,9 @@ typedef struct tData Data;
  */
 Data *InicializaData(int dia, int mes, int ano);
 
+/*
+ * Libera espaço alocado para a data da memoria
+ */
+void LiberaData(Data *d);
+
 #endif

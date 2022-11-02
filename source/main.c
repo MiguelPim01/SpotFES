@@ -50,6 +50,8 @@ int main(int argc, char *argv[])
     fclose(pFileMusicas);
 
     // Liberar espaço da memoria
+    LiberaMusicas(musicas);
+    LiberaArtistas(artistas);
 
     return 0;
 }

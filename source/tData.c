@@ -17,3 +17,8 @@ Data *InicializaData(int dia, int mes, int ano)
 
     return data;
 }
+
+void LiberaData(Data *d)
+{
+    free(d);
+}

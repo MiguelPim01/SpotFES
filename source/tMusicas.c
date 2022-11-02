@@ -6,6 +6,7 @@
 
 struct tMusicas {
     Musica **musicas;
+    int qtdMusicas;
 };
 
 Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m)
@@ -35,5 +36,21 @@ Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m)
         qtdMusicas++;
     }
 
+    m->qtdMusicas = qtdMusicas;
+
     return m;
+}
+
+void LiberaMusicas(Musicas *m)
+{
+    // Liberando cada musica separadamente
+    int i;
+    for (i = 0; i < m->qtdMusicas; i++)
+    {
+        LiberaMusica(m->musicas[i]);
+    }
+
+    // Liberando ponteiros restantes
+    free(m->musicas);
+    free(m);
 }

@@ -9,8 +9,10 @@ struct tArtista {
     int numSeguidores, popularidade;
 };
 
-Artista * CriaArtista(char *buffer) {
+Artista * LeArtista(char *buffer) 
+{
     char id[50], generos[300], nome[100];
+
     // Aloca espaço para um artista
     Artista *artista = (Artista *)malloc(sizeof(Artista));
 
@@ -22,10 +24,13 @@ Artista * CriaArtista(char *buffer) {
 
     FinalizaArtista(artista, id, generos, nome);
 
+    // GABIGOL É BALLON D'ORR !!!!!!!!!!!!!
+
     return artista;
 }
 
-void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome) {
+void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome) 
+{
     artista->id = (char *)malloc(strlen(id)*sizeof(char)+1);
     artista->generos = (char *)malloc(strlen(generos)*sizeof(char)+1);
     artista->nome = (char *)malloc(strlen(nome)*sizeof(char)+1);
@@ -33,4 +38,15 @@ void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome) {
     strcpy(artista->id, id);
     strcpy(artista->generos, generos);
     strcpy(artista->nome, nome);
+}
+
+void LiberaArtista(Artista *a)
+{
+    // Liberando ponteiros dentro da struct
+    free(a->generos);
+    free(a->id);
+    free(a->nome);
+    
+    // Liberando ponteiro que aponta pra struct
+    free(a);
 }

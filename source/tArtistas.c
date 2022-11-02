@@ -6,10 +6,11 @@
 
 struct tArtistas {
     Artista **artistas;
-    int qtd;
+    int qtdArtistas;
 };
 
-Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a) {
+Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a) 
+{
     int multiplicador=100, contArtistas=0;
     
     //Aloca espaço para struct artistas
@@ -17,19 +18,38 @@ Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a) {
 
     // Aloca espaço para array de ponteiros de artista (conteúdo da struct artistas)
     a->artistas = (Artista **)malloc(multiplicador*sizeof(Artista *));
-    a->qtd = 0;
 
     char buffer[1000];
-    while (fscanf(pFileArtistas, "%[^\n]\n", buffer) == 1) {
+    while (fscanf(pFileArtistas, "%[^\n]\n", buffer) == 1) 
+    {
         // Realoca espaço
-        if (contArtistas == multiplicador) {
+        if (contArtistas >= multiplicador) 
+        {
             multiplicador *= 2;
             a->artistas = (Artistas **)realloc(a->artistas, multiplicador*sizeof(Artista *));
         }
+
         // Cria artista e bota no array de ponteiro de artista
-        a->artistas[contArtistas] = CriaArtista(buffer);
-        a->qtd++;
+        a->artistas[contArtistas] = LeArtista(buffer);
 
         contArtistas++;
     }
+
+    a->qtdArtistas = contArtistas;
+
+    return a;
+}
+
+void LiberaArtistas(Artistas *a)
+{
+    // Liberando cada artista separadamente
+    int i;
+    for (i = 0; i < a->qtdArtistas; i++)
+    {
+        LiberaArtista(a->artistas[i]);
+    }
+
+    // Liberando os ponteiros restantes
+    free(a->artistas);
+    free(a);
 }
