@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "tMusica.h"
 #include "tArtistas.h"
@@ -21,6 +22,8 @@ Musica *LeMusica(char *buffer)
     Musica *musica = (Musica *)malloc(sizeof(Musica));
     
     int dia, mes, ano;
+    float aux1;
+    int aux2;
     char id[TAM_ID], nome[50], artistas[100], id_artistas[200];
     
     // Fazendo leitura da musica
@@ -42,8 +45,14 @@ Musica *LeMusica(char *buffer)
     sscanf(buffer, ";%d", &musica->mode);
     sscanf(buffer, ";%f", &musica->speechiness);
     sscanf(buffer, ";%f", &musica->acousticness);
-    sscanf(buffer, ";%f", &musica->instrumentalness);
-    sscanf(buffer, ";%f\n", &musica->liveness);
+
+    sscanf(buffer, ";%fe-%d", &aux1, &aux2);
+    musica->instrumentalness = aux1*pow(10, aux2);
+    
+    sscanf(buffer, ";%f", &musica->liveness);
+    sscanf(buffer, ";%f", &musica->valence);
+    sscanf(buffer, ";%f", &musica->tempo);
+    sscanf(buffer, ";%d\n", &musica->time_signature);
 
     // Atribuindo id, nome, artistas e id_artistas a musica
     FinalizaMusica(musica, id, nome, artistas, id_artistas);
@@ -69,7 +78,7 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
 void LiberaMusica(Musica *m)
 {
     // Liberando ponteiros que estao na struct
-    LiberaArtistas(m->arrayArtistas);
+    //LiberaArtistas(m->arrayArtistas);
     LiberaData(m->data);
     free(m->id);
     free(m->nome);

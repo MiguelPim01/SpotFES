@@ -26,7 +26,7 @@ Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a)
         if (contArtistas >= multiplicador) 
         {
             multiplicador *= 2;
-            a->artistas = (Artistas **)realloc(a->artistas, multiplicador*sizeof(Artista *));
+            a->artistas = (Artista **)realloc(a->artistas, multiplicador*sizeof(Artista *));
         }
 
         // Cria artista e bota no array de ponteiro de artista
