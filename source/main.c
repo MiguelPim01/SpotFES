@@ -7,8 +7,8 @@
 int main(int argc, char *argv[])
 {
     FILE *pFileMusicas, *pFileArtistas;
-    tArtistas *artistas;
-    tMusicas *musicas;
+    Artistas *artistas;
+    Musicas *musicas;
     char caminho[500];
 
     // ABERTURA E LEITURA DOS ARQUIVOS
@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     }
 
     // Leitura do arquivo de artistas e alocação dinamica
+    artistas = CarregaArquivoArtistas(pFileArtistas, artistas);
 
     // Abrindo arquivo de musicas
     sprintf(caminho, "%s.csv", argv[2]);
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
     }
 
     // Leitura do arquivo de musicas e alocação dinamica
+    musicas = CarregaArquivoMusicas(pFileMusicas, musicas);
 
     // Fechar arquivos
 

@@ -1,11 +1,11 @@
 #ifndef _TMUSICAS_H_
 #define _TMUSICAS_H_
 
-typedef struct tMusicas tMusicas;
+typedef struct tMusicas Musicas;
 
 /*
  * Recebe arquivo para leitura e retorna um ponteiro para todas as musicas
  */
-tMusicas *CarregaArquivoDeMusicas(FILE *pFile, tMusicas *m);
+Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m);
 
 #endif

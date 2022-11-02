@@ -9,16 +9,16 @@
 #define TAM_ID 22
 
 struct tMusica {
-    tArtistas *arrayArtistas;
+    Artistas *arrayArtistas;
     tData *data;
     int qtdArtistas, duracao_ms, popularity, explicit, mode, time_signature, key;
     float tempo, danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence;
     char *id, *nome, *artistas, *id_artistas;
 };
 
-tMusica *LeMusica(char *buffer)
+Musica *LeMusica(char *buffer)
 {
-    tMusica *musica = (tMusica *)malloc(sizeof(struct tMusica));
+    Musica *musica = (Musica *)malloc(sizeof(Musica));
     
     int dia, mes, ano;
     char id[TAM_ID], nome[50], artistas[100], id_artistas[200];
@@ -40,30 +40,29 @@ tMusica *LeMusica(char *buffer)
     sscanf(buffer, ";%d", &musica->key);
     sscanf(buffer, ";%f", &musica->loudness);
     sscanf(buffer, ";%d", &musica->mode);
+    // VASCO DA GAMA
     sscanf(buffer, ";%f", &musica->speechiness);
     sscanf(buffer, ";%f", &musica->acousticness);
     sscanf(buffer, ";%f", &musica->instrumentalness);
     sscanf(buffer, ";%f\n", &musica->liveness);
 
     // Atribuindo id, nome, artistas e id_artistas a musica
-    musica = FinalizaMusica(musica, id, nome, artistas, id_artistas);
+    FinalizaMusica(musica, id, nome, artistas, id_artistas);
 
     return musica;
 }
 
-tMusica *FinalizaMusica(tMusica *musica, char *id, char *nome, char *artistas, char *id_artistas)
+void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *id_artistas)
 {
     // Alocando espaço para cada uma das strings
-    musica->id = (char *)malloc(strlen(id)*sizeof(char));
-    musica->nome = (char *)malloc(strlen(nome)*sizeof(char));
-    musica->artistas = (char *)malloc(strlen(artistas)*sizeof(char));
-    musica->id_artistas = (char *)malloc(strlen(id_artistas)*sizeof(char));
+    musica->id = (char *)malloc(strlen(id)*sizeof(char)+1);
+    musica->nome = (char *)malloc(strlen(nome)*sizeof(char)+1);
+    musica->artistas = (char *)malloc(strlen(artistas)*sizeof(char)+1);
+    musica->id_artistas = (char *)malloc(strlen(id_artistas)*sizeof(char)+1);
 
     // Passando as strings para a musica
     strcpy(musica->id, id);
     strcpy(musica->nome, nome);
     strcpy(musica->artistas, artistas);
     strcpy(musica->id_artistas, id_artistas);
-
-    return musica;
 }

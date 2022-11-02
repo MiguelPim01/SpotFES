@@ -8,16 +8,16 @@ struct tMusicas {
     tMusica **musicas;
 };
 
-tMusicas *CarregaArquivoDeMusicas(FILE *pFile, tMusicas *m)
+Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m)
 {
     char linha[2000];
     int espacoAlocado=100, qtdMusicas=0;
 
-    // Aloca espaço para o ponteiro de ponteiro "(tMusica **)musicas"
-    m = (tMusicas *)malloc(sizeof(tMusicas));
+    // Aloca espaço para o ponteiro de ponteiro "(Musica **)musicas"
+    m = (Musicas *)malloc(sizeof(Musicas));
 
-    // Aloca espaço para os ponteiros que irão apontar para as structs tMusica
-    m->musicas = (tMusica **)malloc(espacoAlocado*sizeof(tMusica *));
+    // Aloca espaço para os ponteiros que irão apontar para as structs Musica
+    m->musicas = (Musica **)malloc(espacoAlocado*sizeof(Musica *));
 
     while (fscanf(pFile, "%[^\n]\n", linha) == 1)
     {
@@ -25,7 +25,7 @@ tMusicas *CarregaArquivoDeMusicas(FILE *pFile, tMusicas *m)
         if (qtdMusicas >= espacoAlocado)
         {
             espacoAlocado = espacoAlocado * 2;
-            m->musicas = (tMusica **)realloc(m->musicas, espacoAlocado*sizeof(tMusica *));
+            m->musicas = (Musica **)realloc(m->musicas, espacoAlocado*sizeof(Musica *));
         }
         
         // Fazer a leitura da musica
