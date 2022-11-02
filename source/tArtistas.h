@@ -13,4 +13,6 @@ Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a);
  */
 void LiberaArtistas(Artistas *a);
 
+void ImprimeDadosDosArtistas(Artistas *a);
+
 #endif

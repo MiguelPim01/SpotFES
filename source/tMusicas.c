@@ -54,3 +54,13 @@ void LiberaMusicas(Musicas *m)
     free(m->musicas);
     free(m);
 }
+
+void ImprimeDadosDasMusicas(Musicas *m)
+{
+    int i;
+    for (i = 0; i < 2; i++)
+    {
+        ImprimeMusica(m->musicas[i]);
+        printf("\n");
+    }
+}

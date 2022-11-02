@@ -13,4 +13,6 @@ Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m);
  */
 void LiberaMusicas(Musicas *m);
 
+void ImprimeDadosDasMusicas(Musicas *m);
+
 #endif

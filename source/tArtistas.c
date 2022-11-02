@@ -53,3 +53,13 @@ void LiberaArtistas(Artistas *a)
     free(a->artistas);
     free(a);
 }
+
+void ImprimeDadosDosArtistas(Artistas *a)
+{
+    int i;
+    for (i = 0; i < a->qtdArtistas; i++)
+    {
+        ImprimeArtista(a->artistas[i]);
+        printf("\n");
+    }
+}

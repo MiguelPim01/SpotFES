@@ -18,4 +18,6 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
  */
 void LiberaMusica(Musica *m);
 
+void ImprimeMusica(Musica *musica);
+
 #endif

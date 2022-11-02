@@ -18,4 +18,6 @@ void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome);
  */
 void LiberaArtista(Artista *a);
 
+void ImprimeArtista(Artista *artista);
+
 #endif

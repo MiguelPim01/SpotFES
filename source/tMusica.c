@@ -27,32 +27,15 @@ Musica *LeMusica(char *buffer)
     char id[TAM_ID], nome[50], artistas[100], id_artistas[200];
     
     // Fazendo leitura da musica
-    sscanf(buffer, "%[^;]", id);
-    sscanf(buffer, ";%[^;]", nome);
-    sscanf(buffer, ";%d", &musica->popularity);
-    sscanf(buffer, ";%d", &musica->duracao_ms);
-    sscanf(buffer, ";%d", &musica->explicit);
-    sscanf(buffer, ";%[^;]", artistas);
-    sscanf(buffer, ";%[^;]", id_artistas);
+    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%d-%d-%d;%f;%f;%d;%f;%d;%f;%f;%fe-%d;%f;%f;%f;%d\n", 
+        id, nome, &musica->popularity, &musica->duracao_ms, &musica->explicit, artistas, id_artistas, &ano, &mes, &dia, 
+        &musica->danceability, &musica->energy, &musica->key, &musica->loudness, &musica->mode, &musica->speechiness,
+        &musica->acousticness, &aux1, &aux2, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature);
     
-    sscanf(buffer, ";%d-%d-%d", &ano, &mes, &dia);
+    
     musica->data = InicializaData(dia, mes, ano);
 
-    sscanf(buffer, ";%f", &musica->danceability);
-    sscanf(buffer, ";%f", &musica->energy);
-    sscanf(buffer, ";%d", &musica->key);
-    sscanf(buffer, ";%f", &musica->loudness);
-    sscanf(buffer, ";%d", &musica->mode);
-    sscanf(buffer, ";%f", &musica->speechiness);
-    sscanf(buffer, ";%f", &musica->acousticness);
-
-    sscanf(buffer, ";%fe-%d", &aux1, &aux2);
     musica->instrumentalness = aux1*pow(10, aux2);
-    
-    sscanf(buffer, ";%f", &musica->liveness);
-    sscanf(buffer, ";%f", &musica->valence);
-    sscanf(buffer, ";%f", &musica->tempo);
-    sscanf(buffer, ";%d\n", &musica->time_signature);
 
     // Atribuindo id, nome, artistas e id_artistas a musica
     FinalizaMusica(musica, id, nome, artistas, id_artistas);
@@ -87,4 +70,9 @@ void LiberaMusica(Musica *m)
 
     // Liberando o ponteiro que aponta para a struct
     free(m);
+}
+
+void ImprimeMusica(Musica *musica)
+{
+    printf("%s", musica->id_artistas);
 }

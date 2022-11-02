@@ -50,3 +50,8 @@ void LiberaArtista(Artista *a)
     // Liberando ponteiro que aponta pra struct
     free(a);
 }
+
+void ImprimeArtista(Artista *artista)
+{
+    printf("%s", artista->id);
+}

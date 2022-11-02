@@ -49,6 +49,12 @@ int main(int argc, char *argv[])
     fclose(pFileArtistas);
     fclose(pFileMusicas);
 
+    // TEMPORARIO
+    printf("MUSICAS:\n");
+    ImprimeDadosDasMusicas(musicas);
+    printf("ARTISTAS:\n");
+    ImprimeDadosDosArtistas(artistas);
+
     // Liberar espaço da memoria
     LiberaMusicas(musicas);
     LiberaArtistas(artistas);
