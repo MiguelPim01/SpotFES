@@ -44,6 +44,9 @@ int main(int argc, char *argv[])
 
     // Leitura do arquivo de musicas e alocação dinamica
     musicas = CarregaArquivoMusicas(pFileMusicas, musicas);
+    /*
+    TAYLOR SWIFT A MAIOR DE TODAS!!!!!!!!!!!!
+    */
 
     // Fechar arquivos
     fclose(pFileArtistas);

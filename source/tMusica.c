@@ -74,5 +74,5 @@ void LiberaMusica(Musica *m)
 
 void ImprimeMusica(Musica *musica)
 {
-    printf("%s", musica->id_artistas);
+    printf("%s", musica->artistas);
 }

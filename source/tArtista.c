@@ -16,15 +16,12 @@ Artista * LeArtista(char *buffer)
     // Aloca espaço para um artista
     Artista *artista = (Artista *)malloc(sizeof(Artista));
 
-    sscanf(buffer, "%[^;];", id);
-    sscanf(buffer, "%d;", &artista->numSeguidores);
-    sscanf(buffer, "%[^;];", generos);
-    sscanf(buffer, "%[^;];", nome);
-    sscanf(buffer, "%d\n", &artista->popularidade);
+    sscanf(buffer, "%[^;];%d.0;%[^;];%[^;];%d\n", id, &artista->numSeguidores, generos, nome, &artista->popularidade);
 
     FinalizaArtista(artista, id, generos, nome);
 
     // GABIGOL É BALLON D'ORR !!!!!!!!!!!!!
+    //  FRACOOOOOOOO!!!!!!!!
 
     return artista;
 }
@@ -53,5 +50,5 @@ void LiberaArtista(Artista *a)
 
 void ImprimeArtista(Artista *artista)
 {
-    printf("%s", artista->id);
+    printf("%s \\ %d \\ %s \\ %s \\ %d", artista->id, artista->numSeguidores, artista->generos, artista->nome, artista->popularidade);
 }
