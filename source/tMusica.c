@@ -27,7 +27,7 @@ Musica *LeMusica(char *buffer)
     char id[TAM_ID], nome[50], artistas[100], id_artistas[200];
     
     // Fazendo leitura da musica
-    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%d-%d-%d;%f;%f;%d;%f;%d;%f;%f;%fe-%d;%f;%f;%f;%d\n", 
+    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%d-%d-%d;%f;%f;%d;%f;%d;%f;%f;%fe%d;%f;%f;%f;%d\n", 
         id, nome, &musica->popularity, &musica->duracao_ms, &musica->explicit, artistas, id_artistas, &ano, &mes, &dia, 
         &musica->danceability, &musica->energy, &musica->key, &musica->loudness, &musica->mode, &musica->speechiness,
         &musica->acousticness, &aux1, &aux2, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature);
@@ -74,5 +74,5 @@ void LiberaMusica(Musica *m)
 
 void ImprimeMusica(Musica *musica)
 {
-    printf("%s", musica->artistas);
+    printf("%s", musica->nome);
 }

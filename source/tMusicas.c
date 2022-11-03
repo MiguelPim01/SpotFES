@@ -58,7 +58,7 @@ void LiberaMusicas(Musicas *m)
 void ImprimeDadosDasMusicas(Musicas *m)
 {
     int i;
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < m->qtdMusicas; i++)
     {
         ImprimeMusica(m->musicas[i]);
         printf("\n");
