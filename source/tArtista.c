@@ -32,9 +32,9 @@ void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome)
     artista->generos = (char *)malloc(strlen(generos)*sizeof(char)+1);
     artista->nome = (char *)malloc(strlen(nome)*sizeof(char)+1);
 
-    strcpy(artista->id, id);
-    strcpy(artista->generos, generos);
-    strcpy(artista->nome, nome);
+    strncpy(artista->id, id, strlen(id));
+    strncpy(artista->generos, generos, strlen(generos));
+    strncpy(artista->nome, nome, strlen(nome));
 }
 
 void LiberaArtista(Artista *a)

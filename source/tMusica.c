@@ -52,10 +52,10 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
     musica->id_artistas = (char *)malloc(strlen(id_artistas)*sizeof(char)+1);
 
     // Passando as strings para a musica
-    strcpy(musica->id, id);
-    strcpy(musica->nome, nome);
-    strcpy(musica->artistas, artistas);
-    strcpy(musica->id_artistas, id_artistas);
+    strncpy(musica->id, id, strlen(id));
+    strncpy(musica->nome, nome, strlen(nome));
+    strncpy(musica->artistas, artistas, strlen(artistas));
+    strncpy(musica->id_artistas, id_artistas, strlen(id_artistas));
 }
 
 void LiberaMusica(Musica *m)
