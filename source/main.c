@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     if (pFileArtistas == NULL)
     {
-        printf("ERRO: Nao foi possivel abrir o arquivo %s", argv[1]);
+        printf("ERRO: Nao foi possivel abrir o arquivo %s\n", argv[1]);
         return 1;
     }
 
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
     if (pFileMusicas == NULL)
     {
-        printf("ERRO: Nao foi possivel abrir %s", argv[2]);
+        printf("ERRO: Nao foi possivel abrir %s\n", argv[2]);
         return 1;
     }
 
@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
     TAYLOR SWIFT A MAIOR DE TODAS!!!!!!!!!!!!
     */
 
+    ImprimeDadosDasMusicas(musicas);
     // Fechar arquivos
     fclose(pFileArtistas);
     fclose(pFileMusicas);

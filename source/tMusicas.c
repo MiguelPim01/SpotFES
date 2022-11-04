@@ -25,7 +25,7 @@ Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m)
         // Fazer realocação se necessario
         if (qtdMusicas >= espacoAlocado)
         {
-            espacoAlocado = espacoAlocado * 2;
+            espacoAlocado *= 2;
             m->musicas = (Musica **)realloc(m->musicas, espacoAlocado*sizeof(Musica *));
         }
         
@@ -58,7 +58,7 @@ void LiberaMusicas(Musicas *m)
 void ImprimeDadosDasMusicas(Musicas *m)
 {
     int i;
-    for (i = 0; i < m->qtdMusicas; i++)
+    for (i = 0; i<m->qtdMusicas; i++)
     {
         ImprimeMusica(m->musicas[i]);
         printf("\n");
