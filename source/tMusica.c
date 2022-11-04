@@ -64,6 +64,7 @@ void LiberaMusica(Musica *m)
     free(m->artistas);
     free(m->id_artistas);
     free(m->data);
+
     // Liberando o ponteiro que aponta para a struct
     free(m);
 }
