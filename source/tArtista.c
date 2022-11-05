@@ -28,13 +28,13 @@ Artista * LeArtista(char *buffer)
 
 void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome) 
 {
-    artista->id = (char *)malloc(strlen(id)*sizeof(char)+1);
-    artista->generos = (char *)malloc(strlen(generos)*sizeof(char)+1);
-    artista->nome = (char *)malloc(strlen(nome)*sizeof(char)+1);
+    artista->id = (char *)malloc((strlen(id)+1)*sizeof(char));
+    artista->generos = (char *)malloc((strlen(generos)+1)*sizeof(char));
+    artista->nome = (char *)malloc((strlen(nome)+1)*sizeof(char));
 
-    strncpy(artista->id, id, strlen(id));
-    strncpy(artista->generos, generos, strlen(generos));
-    strncpy(artista->nome, nome, strlen(nome));
+    strncpy(artista->id, id, strlen(id)+1);
+    strncpy(artista->generos, generos, strlen(generos)+1);
+    strncpy(artista->nome, nome, strlen(nome)+1);
 }
 
 void LiberaArtista(Artista *a)

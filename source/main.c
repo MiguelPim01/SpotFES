@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
 
     // Imprimindo para verificação (temporario)
     ImprimeDadosDasMusicas(musicas);
+    //ImprimeDadosDosArtistas(artistas);
 
     // Fechar arquivos
     fclose(pFileArtistas);

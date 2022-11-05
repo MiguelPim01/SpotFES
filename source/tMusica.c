@@ -6,8 +6,6 @@
 #include "tMusica.h"
 #include "tArtistas.h"
 
-#define TAM_ID 22
-
 struct tMusica {
     Artistas *arrayArtistas;
     int qtdArtistas, duracao_ms, popularity, explicit, mode, time_signature, key;
@@ -19,10 +17,9 @@ Musica *LeMusica(char *buffer)
 {
     Musica *musica = (Musica *)malloc(sizeof(Musica));
     
-    int dia, mes, ano;
-    float aux1;
-    int aux2;
-    char id[TAM_ID], nome[50], artistas[100], id_artistas[400], data[11];
+    float aux1=0;
+    int aux2=0;
+    char id[40], nome[50], artistas[100], id_artistas[400], data[20];
     
     // Fazendo leitura da musica
     sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%fe%d;%f;%f;%f;%d\n", 
@@ -41,18 +38,18 @@ Musica *LeMusica(char *buffer)
 void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *id_artistas, char *data)
 {
     // Alocando espaço para cada uma das strings
-    musica->id = (char *)malloc(strlen(id)*sizeof(char)+1);
-    musica->nome = (char *)malloc(strlen(nome)*sizeof(char)+1);
-    musica->artistas = (char *)malloc(strlen(artistas)*sizeof(char)+1);
-    musica->id_artistas = (char *)malloc(strlen(id_artistas)*sizeof(char)+1);
-    musica->data = (char *)malloc(strlen(data)*sizeof(char)+1);
+    musica->id = (char *)malloc((strlen(id)+1)*sizeof(char));
+    musica->nome = (char *)malloc((strlen(nome)+1)*sizeof(char));
+    musica->artistas = (char *)malloc((strlen(artistas)+1)*sizeof(char));
+    musica->id_artistas = (char *)malloc((strlen(id_artistas)+1)*sizeof(char));
+    musica->data = (char *)malloc((strlen(data)+1)*sizeof(char));
 
     // Passando as strings para a musica
-    strncpy(musica->id, id, strlen(id));
-    strncpy(musica->nome, nome, strlen(nome));
-    strncpy(musica->artistas, artistas, strlen(artistas));
-    strncpy(musica->id_artistas, id_artistas, strlen(id_artistas));
-    strcpy(musica->data, data);
+    strncpy(musica->id, id, strlen(id)+1);
+    strncpy(musica->nome, nome, strlen(nome)+1);
+    strncpy(musica->artistas, artistas, strlen(artistas)+1);
+    strncpy(musica->id_artistas, id_artistas, strlen(id_artistas)+1);
+    strncpy(musica->data, data, strlen(data)+1);
 }
 
 void LiberaMusica(Musica *m)
@@ -71,5 +68,5 @@ void LiberaMusica(Musica *m)
 
 void ImprimeMusica(Musica *musica)
 {
-    printf("%s, %.2f", musica->data, musica->danceability);
+    printf("%s ", musica->nome);
 }
