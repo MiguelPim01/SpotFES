@@ -20,9 +20,6 @@ Artista * LeArtista(char *buffer)
 
     FinalizaArtista(artista, id, generos, nome);
 
-    // GABIGOL É BALLON D'ORR !!!!!!!!!!!!!
-    //  FRACOOOOOOOO!!!!!!!!
-
     return artista;
 }
 

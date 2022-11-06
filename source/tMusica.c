@@ -19,7 +19,7 @@ Musica *LeMusica(char *buffer)
     
     float aux1=0;
     int aux2=0;
-    char id[40], nome[50], artistas[100], id_artistas[400], data[20];
+    char id[40], nome[100], artistas[300], id_artistas[500], data[20];
     
     // Fazendo leitura da musica
     sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%fe%d;%f;%f;%f;%d\n", 
