@@ -71,6 +71,7 @@ int main(int argc, char *argv[])
         {
             // 1 - Buscar musica:
             case 1:
+            
                 printf("Digite um texto:\n--> ");
                 scanf("%[^\n]", texto);
                 BuscaMusicas(musicas, texto);
