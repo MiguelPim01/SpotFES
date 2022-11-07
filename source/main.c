@@ -46,7 +46,9 @@ int main(int argc, char *argv[])
     musicas = CarregaArquivoMusicas(pFileMusicas, musicas);
 
     // Imprimindo para verificação (temporario)
+    printf("MUSICAS:\n\n");
     // ImprimeDadosDasMusicas(musicas);
+    printf("\nARTISTAS:\n\n");
     // ImprimeDadosDosArtistas(artistas);
 
     // Fechar arquivos

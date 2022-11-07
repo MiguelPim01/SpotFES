@@ -19,7 +19,7 @@ Musica *LeMusica(char *buffer)
     
     float aux1=0;
     int aux2=0;
-    char id[70], nome[300], artistas[1000], id_artistas[1000], data[30];
+    char id[70], nome[200], artistas[900], id_artistas[1060], data[50];
     
     // Fazendo leitura da musica
     sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%fe%d;%f;%f;%f;%d\n", 
@@ -37,7 +37,11 @@ Musica *LeMusica(char *buffer)
 
 void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *id_artistas, char *data)
 {
-    int tamID=strlen(id)+1, tamNome=strlen(nome)+1, tamArtistas=strlen(artistas)+1, tamIDArtistas=strlen(id_artistas)+1, tamData=strlen(data)+1;
+    int tamID=strlen(id)+1;
+    int tamNome=strlen(nome)+1; 
+    int tamArtistas=strlen(artistas)+1; 
+    int tamIDArtistas=strlen(id_artistas)+1;
+    int tamData=strlen(data)+1;
     
     // Alocando espaço para cada uma das strings
     musica->id = (char *)malloc(tamID*sizeof(char));
@@ -70,5 +74,5 @@ void LiberaMusica(Musica *m)
 
 void ImprimeMusica(Musica *musica)
 {
-    printf("%s ", musica->nome);
+    printf("%s / %s / %s / %s", musica->nome, musica->id, musica->artistas, musica->id_artistas);
 }

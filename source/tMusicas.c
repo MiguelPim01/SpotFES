@@ -63,5 +63,5 @@ void ImprimeDadosDasMusicas(Musicas *m)
         ImprimeMusica(m->musicas[i]);
         printf("\n");
     }
-    printf("%d\n", m->qtdMusicas);
+    printf("QTD MUSICAS: %d\n", m->qtdMusicas);
 }
