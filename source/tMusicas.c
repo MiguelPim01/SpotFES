@@ -11,7 +11,7 @@ struct tMusicas {
 
 Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m)
 {
-    char linha[2000];
+    char linha[5000];
     int espacoAlocado=100, qtdMusicas=0;
 
     // Aloca espaço para o ponteiro de ponteiro "(Musica **)musicas"
