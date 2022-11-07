@@ -13,6 +13,14 @@ Musicas *CarregaArquivoMusicas(FILE *pFile, Musicas *m);
  */
 void LiberaMusicas(Musicas *m);
 
+/*
+ * Imprimir os dados de todas as musicas contidas no vetor alocado de musicas
+ */
 void ImprimeDadosDasMusicas(Musicas *m);
+
+/*
+ * Faz a busca musica a musica de acordo com o texto digitado pelo usuario
+ */
+void BuscaMusicas(Musicas *m, char *texto);
 
 #endif

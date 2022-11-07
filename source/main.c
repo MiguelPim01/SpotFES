@@ -57,18 +57,23 @@ int main(int argc, char *argv[])
 
     // Relacionar artistas com as musicas que fazem parte (GUSTAVO)
 
-    int opcao=0;
+    int opcao=0, flagBreak=0;
+    char texto[100];
 
     // FUNCIONAMENTO DO PROGRAMA:
     
-    printf("Selecione uma opção:\n");
+    printf("Selecione uma opção:\n--> ");
 
     while (scanf("%d", &opcao) == 1)
     {
+        scanf("%*c");
         switch (opcao)
         {
             // 1 - Buscar musica:
             case 1:
+                printf("Digite um texto:\n--> ");
+                scanf("%[^\n]", texto);
+                BuscaMusicas(musicas, texto);
                 
                 break;
 
@@ -105,12 +110,17 @@ int main(int argc, char *argv[])
 
             // 8 - Gerar relatorio:
             case 8:
-                
+                flagBreak = 1;
                 break;
             
             default:
                 break;
         } // FIM DO SWITCH
+
+        if (flagBreak)
+        {
+            break;
+        }
 
         printf("Selecione uma opção:\n");
 

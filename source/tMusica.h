@@ -18,6 +18,14 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
  */
 void LiberaMusica(Musica *m);
 
+/*
+ * Imprime dados da musica
+ */
 void ImprimeMusica(Musica *musica);
+
+/*
+ * Se o texto estiver no nome da musica o valor retornado é 1, caso contrario é 0
+ */
+int ComparaMusicaComTexto(Musica *musica, char *texto);
 
 #endif

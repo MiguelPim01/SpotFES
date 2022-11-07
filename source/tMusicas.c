@@ -65,3 +65,17 @@ void ImprimeDadosDasMusicas(Musicas *m)
     }
     printf("QTD MUSICAS: %d\n", m->qtdMusicas);
 }
+
+void BuscaMusicas(Musicas *m, char *texto)
+{
+    int i=0;
+
+    for (i = 0; i < m->qtdMusicas; i++)
+    {
+        if (ComparaMusicaComTexto(m->musicas[i], texto))
+        {
+            printf("Indice: %d, ", i);
+            ImprimeMusica(m->musicas[i]);
+        }
+    }
+}
