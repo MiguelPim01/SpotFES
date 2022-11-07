@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
             break;
         }
 
-        printf("Selecione uma opção:\n");
+        printf("Selecione uma opção:\n--> ");
 
     } // FIM DO WHILE
 
