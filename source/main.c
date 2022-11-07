@@ -46,16 +46,75 @@ int main(int argc, char *argv[])
     musicas = CarregaArquivoMusicas(pFileMusicas, musicas);
 
     // Imprimindo para verificação (temporario)
-    printf("MUSICAS:\n\n");
+    // printf("MUSICAS:\n\n");
     // ImprimeDadosDasMusicas(musicas);
-    printf("\nARTISTAS:\n\n");
+    // printf("\nARTISTAS:\n\n");
     // ImprimeDadosDosArtistas(artistas);
 
     // Fechar arquivos
     fclose(pFileArtistas);
     fclose(pFileMusicas);
 
-    // Relacionar artistas com as musicas que fazem parte (PENDENTE)
+    // Relacionar artistas com as musicas que fazem parte (GUSTAVO)
+
+    int opcao=0;
+
+    // FUNCIONAMENTO DO PROGRAMA:
+    
+    printf("Selecione uma opção:\n");
+
+    while (scanf("%d", &opcao) == 1)
+    {
+        switch (opcao)
+        {
+            // 1 - Buscar musica:
+            case 1:
+                
+                break;
+
+            // 2 - Listar uma musica:
+            case 2:
+                
+                // 2.1 - Executar uma musica:
+                break;
+            
+            // 3 - Criar uma playlist:
+            case 3:
+                
+                break;
+
+            // 4 - Listar playlists:
+            case 4:
+                
+                break;
+
+            // 5 - Listar uma playlist:
+            case 5:
+                
+                break;
+
+            // 6 - Adicionar uma musica na playlist:
+            case 6:
+                
+                break;
+
+            // 7 - Recomendar musicas parecidas com uma playlist:
+            case 7:
+                
+                break;
+
+            // 8 - Gerar relatorio:
+            case 8:
+                
+                break;
+            
+            default:
+                break;
+        } // FIM DO SWITCH
+
+        printf("Selecione uma opção:\n");
+
+    } // FIM DO WHILE
 
     // Liberar espaço da memoria
     LiberaMusicas(musicas);

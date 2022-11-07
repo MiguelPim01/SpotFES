@@ -11,7 +11,7 @@ struct tArtistas {
 
 Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a) 
 {
-    int multiplicador=100, contArtistas=0;
+    int multiplicador=25, contArtistas=0;
     
     //Aloca espaço para struct artistas
     a = (Artistas *)malloc(sizeof(Artistas));
