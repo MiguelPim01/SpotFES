@@ -23,4 +23,9 @@ void ImprimeDadosDasMusicas(Musicas *m);
  */
 void BuscaMusicas(Musicas *m, char *texto);
 
+/*
+ * Faz a busca de uma musica dado o seu id e exibe na tela as informações da musica
+ */
+void BuscaIndiceDaMusica(Musicas *m, char *id);
+
 #endif

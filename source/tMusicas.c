@@ -72,7 +72,21 @@ void BuscaMusicas(Musicas *m, char *texto)
 
     for (i = 0; i < m->qtdMusicas; i++)
     {
-        if (ComparaMusicaComTexto(m->musicas[i], texto))
+        if (ComparaNomeComTexto(m->musicas[i], texto))
+        {
+            printf("Indice: %d, ", i);
+            ImprimeMusica(m->musicas[i]);
+        }
+    }
+}
+
+void BuscaIndiceDaMusica(Musicas *m, char *id)
+{
+    int i=0;
+
+    for (i = 0; i < m->qtdMusicas; i++)
+    {
+        if (ComparaIdComTexto(m->musicas[i], id))
         {
             printf("Indice: %d, ", i);
             ImprimeMusica(m->musicas[i]);

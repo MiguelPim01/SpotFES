@@ -26,6 +26,11 @@ void ImprimeMusica(Musica *musica);
 /*
  * Se o texto estiver no nome da musica o valor retornado é 1, caso contrario é 0
  */
-int ComparaMusicaComTexto(Musica *musica, char *texto);
+int ComparaNomeComTexto(Musica *musica, char *texto);
+
+/*
+ * Se os id's digitado e da musica forem iguais, funcao retorna 1, caso contrario retorna 0
+ */
+int ComparaIdComTexto(Musica *musica, char *texto);
 
 #endif

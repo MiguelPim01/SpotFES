@@ -77,7 +77,7 @@ void ImprimeMusica(Musica *musica)
     printf("id: %s, nome: %s, artistas: %s\n", musica->id, musica->nome, musica->artistas);
 }
 
-int ComparaMusicaComTexto(Musica *musica, char *texto)
+int ComparaNomeComTexto(Musica *musica, char *texto)
 {
     int tamTex=strlen(texto), i=0;
     char aux[tamTex+1];
@@ -88,6 +88,29 @@ int ComparaMusicaComTexto(Musica *musica, char *texto)
     while (musica->nome[i-1] != '\0')
     {
         strncpy(aux, musica->nome+(i-tamTex), tamTex);
+
+        if (strncmp(texto, aux, tamTex) == 0)
+        {
+            return 1;
+        }
+        
+        i++;
+    }
+
+    return 0;
+}
+
+int ComparaIdComTexto(Musica *musica, char *texto)
+{
+    int tamTex=strlen(texto), i=0;
+    char aux[tamTex+1];
+
+    aux[0] = '\0';
+
+    i = tamTex;
+    while (musica->id[i-1] != '\0')
+    {
+        strncpy(aux, musica->id+(i-tamTex), tamTex);
 
         if (strncmp(texto, aux, tamTex) == 0)
         {

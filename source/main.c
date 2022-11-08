@@ -45,12 +45,6 @@ int main(int argc, char *argv[])
     // Leitura do arquivo de musicas e alocação dinamica
     musicas = CarregaArquivoMusicas(pFileMusicas, musicas);
 
-    // Imprimindo para verificação (temporario)
-    // printf("MUSICAS:\n\n");
-    // ImprimeDadosDasMusicas(musicas);
-    // printf("\nARTISTAS:\n\n");
-    // ImprimeDadosDosArtistas(artistas);
-
     // Fechar arquivos
     fclose(pFileArtistas);
     fclose(pFileMusicas);
@@ -71,8 +65,7 @@ int main(int argc, char *argv[])
         {
             // 1 - Buscar musica:
             case 1:
-            
-                printf("Digite um texto:\n--> ");
+                printf("\nDigite um texto:\n--> ");
                 scanf("%[^\n]", texto);
                 BuscaMusicas(musicas, texto);
                 
@@ -80,6 +73,9 @@ int main(int argc, char *argv[])
 
             // 2 - Listar uma musica:
             case 2:
+                printf("\nDigite o ID da musica:\n--> ");
+                scanf("%[^\n]", texto);
+                BuscaIndiceDaMusica(musicas, texto);
                 
                 // 2.1 - Executar uma musica:
                 break;
@@ -115,6 +111,7 @@ int main(int argc, char *argv[])
                 break;
             
             default:
+                printf("Opção Invalida!");
                 break;
         } // FIM DO SWITCH
 
@@ -123,7 +120,7 @@ int main(int argc, char *argv[])
             break;
         }
 
-        printf("Selecione uma opção:\n--> ");
+        printf("\nSelecione uma opção:\n--> ");
 
     } // FIM DO WHILE
 
