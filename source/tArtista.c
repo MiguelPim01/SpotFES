@@ -25,13 +25,24 @@ Artista * LeArtista(char *buffer)
 
 void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome) 
 {
-    artista->id = (char *)malloc((strlen(id)+1)*sizeof(char));
-    artista->generos = (char *)malloc((strlen(generos)+1)*sizeof(char));
-    artista->nome = (char *)malloc((strlen(nome)+1)*sizeof(char));
+    int tamID = strlen(id)+1;
+    int tamNome = strlen(nome)+1; 
+    int tamGeneros = strlen(generos)+1; 
 
-    strncpy(artista->id, id, strlen(id)+1);
-    strncpy(artista->generos, generos, strlen(generos)+1);
-    strncpy(artista->nome, nome, strlen(nome)+1);
+    artista->id = (char *)malloc(tamID*sizeof(char));
+    artista->generos = (char *)malloc(tamGeneros*sizeof(char));
+    artista->nome = (char *)malloc(tamNome*sizeof(char));
+
+    strncpy(artista->id, id, tamID);
+    strncpy(artista->generos, generos, tamGeneros);
+    strncpy(artista->nome, nome, tamNome);
+}
+
+int IdIgualAoArtista(Artista *a, char *id) {   
+    if (strncmp(id, a->id, strlen(id)) == 0) {
+        return 0;
+    }
+    return 1;
 }
 
 void LiberaArtista(Artista *a)

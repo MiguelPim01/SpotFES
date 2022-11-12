@@ -14,6 +14,11 @@ Artista * LeArtista(char *buffer);
 void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome);
 
 /*
+ * Retorna 1 caso o id do artista seja igual ao id passado como parametro
+ */
+int IdIgualAoArtista(Artista *a, char *id);
+
+/*
  * Libera o espaço alocado para um artista da memoria
  */
 void LiberaArtista(Artista *a);

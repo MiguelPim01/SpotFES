@@ -3,6 +3,7 @@
 
 #include "tMusicas.h"
 #include "tMusica.h"
+#include "tArtistas.h"
 
 struct tMusicas {
     Musica **musicas;
@@ -91,5 +92,13 @@ void BuscaIndiceDaMusica(Musicas *m, char *id)
             printf("Indice: %d, ", i);
             ImprimeMusica(m->musicas[i]);
         }
+    }
+}
+
+void RelacionaArraysMusicasEArtistas(Musicas *m, Artistas *as) {
+    int i;
+
+    for (i=0; i<m->qtdMusicas; i++) {
+        AtribuiArtistasAMusica(m->musicas[i], as);
     }
 }

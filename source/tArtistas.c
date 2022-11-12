@@ -63,3 +63,13 @@ void ImprimeDadosDosArtistas(Artistas *a)
         printf("\n");
     }
 }
+
+Artista * RetornaArtista(Artistas *as, char *id) {
+    int i;
+    
+    for (i=0; i<as->qtdArtistas; i++) {
+        if (IdIgualAoArtista(as->artistas[i], id)) {
+            return as->artistas[i];
+        }
+    }
+}

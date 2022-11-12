@@ -49,7 +49,8 @@ int main(int argc, char *argv[])
     fclose(pFileArtistas);
     fclose(pFileMusicas);
 
-    // Relacionar artistas com as musicas que fazem parte (GUSTAVO)
+    // Relacionar artistas com as musicas que fazem parte
+    RelacionaArraysMusicasEArtistas(musicas, artistas);
 
     int opcao=0, flagBreak=0;
     char texto[100];

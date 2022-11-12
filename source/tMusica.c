@@ -5,9 +5,10 @@
 
 #include "tMusica.h"
 #include "tArtistas.h"
+#include "tArtista.h"
 
 struct tMusica {
-    Artistas *arrayArtistas;
+    Artista **arrayArtistas;
     int qtdArtistas, duracao_ms, popularity, explicit, mode, time_signature, key;
     float tempo, danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence;
     char *id, *nome, *artistas, *id_artistas, *data;
@@ -74,7 +75,11 @@ void LiberaMusica(Musica *m)
 
 void ImprimeMusica(Musica *musica)
 {
-    printf("id: %s, nome: %s, artistas: %s\n", musica->id, musica->nome, musica->artistas);
+    // printf("id: %s, nome: %s, artistas: %s\n", musica->id, musica->nome, musica->artistas);
+    int i, qtd = RetornaQtdArtistasDaMusica(musica);
+    for(i=0; i<qtd; i++) {
+        ImprimeArtista(musica->arrayArtistas[i]);
+    }
 }
 
 int ComparaNomeComTexto(Musica *musica, char *texto)
@@ -121,4 +126,40 @@ int ComparaIdComTexto(Musica *musica, char *texto)
     }
 
     return 0;
+}
+
+void AtribuiArtistasAMusica(Musica *m, Artistas *as) {
+    char id[15][30];
+    int i, contPosicaoArray=0, qtdArtistasMus = RetornaQtdArtistasDaMusica(m);
+    printf("%d ", qtdArtistasMus);
+    
+    for (i=1; i<=qtdArtistasMus; i++) {
+        /* Caso seja o último artista lido, lê até o ';' que sinaliza o final
+        e não até a '|' que separa os artistas */
+        if (i == qtdArtistasMus) {
+            // Ajeitar essa leitura de strings aqui de um jeito q ele le cada artista e armazena na matriz
+            sscanf(m->id_artistas, "%[^;];", id[qtdArtistasMus-1]);
+        } else {
+            sscanf(m->id_artistas, "%[^|]|", id[qtdArtistasMus-1]);
+        }
+        printf("%s\n", id[qtdArtistasMus-1]);
+        // Varre array artistas para procurar aquele que tem id igual ao verificado
+        m->arrayArtistas[contPosicaoArray] = RetornaArtista(as, id[qtdArtistasMus-1]);
+        contPosicaoArray++;
+    }
+}
+
+int RetornaQtdArtistasDaMusica(Musica *m) {
+    int i=0, cont=1;
+
+    while (1) {
+        if (m->id_artistas[i] == '|') {
+            cont++;
+        }
+        if (m->id_artistas[i] == ';') {
+            // printf("%d\n", cont);
+            return cont;
+        }
+        i++;
+    }
 }

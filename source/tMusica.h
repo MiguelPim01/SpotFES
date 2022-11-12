@@ -1,5 +1,6 @@
 #ifndef _TMUSICA_H_
 #define _TMUSICA_H_
+#include "tArtistas.h"
 
 typedef struct tMusica Musica;
 
@@ -32,5 +33,16 @@ int ComparaNomeComTexto(Musica *musica, char *texto);
  * Se os id's digitado e da musica forem iguais, funcao retorna 1, caso contrario retorna 0
  */
 int ComparaIdComTexto(Musica *musica, char *texto);
+
+/*
+ * 
+ */
+void AtribuiArtistasAMusica(Musica *m, Artistas *as);
+
+/*
+ * Varre a string idArtistas da struct e retorna a quantidade de artistas que essa musica possui
+ */
+int RetornaQtdArtistasDaMusica(Musica *m);
+
 
 #endif
