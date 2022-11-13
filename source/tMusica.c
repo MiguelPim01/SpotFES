@@ -18,27 +18,15 @@ Musica *LeMusica(char *buffer)
 {
     Musica *musica = (Musica *)malloc(sizeof(Musica));
     
-    float aux1=0;
-    int aux2=0;
-    char id[70], nome[200], artistas[900], id_artistas[1060], data[50], instrumentalness[20];
+
+    char id[70], nome[200], artistas[900], id_artistas[1060], data[50];
+    id[0]='\0'; nome[0]='\0'; artistas[0]='\0'; id_artistas[0]='\0'; data[0]='\0'; // Inicializando
     
     // Fazendo leitura da musica
-    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%[^;];%f;%f;%f;%d\n", 
+    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%f;%f;%f;%f;%d\n", 
         id, nome, &musica->popularity, &musica->duracao_ms, &musica->explicit, artistas, id_artistas, data, 
         &musica->danceability, &musica->energy, &musica->key, &musica->loudness, &musica->mode, &musica->speechiness,
-        &musica->acousticness, instrumentalness, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature);
-
-    if (strstr(instrumentalness, "e") == NULL)
-    {
-        sscanf(instrumentalness, "%f", &musica->instrumentalness);
-    }
-    else 
-    {
-        sscanf(instrumentalness, "%fe%d", &aux1, &aux2);
-        musica->instrumentalness = aux1*pow(10, aux2);
-    }
-    
-    musica->instrumentalness = aux1*pow(10, aux2);
+        &musica->acousticness, &musica->instrumentalness, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature);
 
     // Atribuindo id, nome, artistas e id_artistas a musica
     FinalizaMusica(musica, id, nome, artistas, id_artistas, data);
@@ -50,7 +38,7 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
 {
     int tamID=strlen(id)+1;
     int tamNome=strlen(nome)+1; 
-    int tamArtistas=strlen(artistas)+1; 
+    int tamArtistas=strlen(artistas)+1;
     int tamIDArtistas=strlen(id_artistas)+1;
     int tamData=strlen(data)+1;
     

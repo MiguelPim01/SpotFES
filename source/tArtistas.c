@@ -68,11 +68,14 @@ void ImprimeDadosDosArtistas(Artistas *a)
 Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistasMusica)
 {
     int i=0, cont=0;
+    char *aux;
 
     // Varrer o array de artistas
     for (i = 0; i < a->qtdArtistas; i++)
     {
-        if (strstr(id_artistas, ObtemIdArtista(a->artistas[i])) != NULL)
+        aux = strstr(id_artistas, ObtemIdArtista(a->artistas[i])); // PROBLEMAO
+
+        if (aux != NULL)
         {
             arrayArtistas[cont] = a->artistas[i];
             cont++;
