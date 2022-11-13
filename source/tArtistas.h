@@ -1,6 +1,8 @@
 #ifndef _TARTISTAS_H_
 #define _TARTISTAS_H_
 
+#include "tArtista.h"
+
 typedef struct tArtistas Artistas;
 
 /*
@@ -14,5 +16,9 @@ Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a);
 void LiberaArtistas(Artistas *a);
 
 void ImprimeDadosDosArtistas(Artistas *a);
+
+Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistas);
+
+void ImprimeVetorDeArtistas(Artista **arrayArtistas, int qtdArtistas);
 
 #endif

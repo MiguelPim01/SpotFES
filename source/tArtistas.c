@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "tArtistas.h"
 #include "tArtista.h"
@@ -61,5 +62,40 @@ void ImprimeDadosDosArtistas(Artistas *a)
     {
         ImprimeArtista(a->artistas[i]);
         printf("\n");
+    }
+}
+
+Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistas)
+{
+    int i=0, cont=0;
+
+    for (i = 0; i < a->qtdArtistas; i++)
+    {
+        if (strstr(id_artistas, ObtemIdArtista(a->artistas[i])) != NULL)
+        {
+            arrayArtistas[cont] = a->artistas[i];
+            cont++;
+        }
+        if (cont == qtdArtistas)
+        {
+            break;
+        }
+    }
+
+    if (cont < qtdArtistas)
+    {
+        arrayArtistas[cont] = NULL;
+    }
+
+    return arrayArtistas;
+}
+
+void ImprimeVetorDeArtistas(Artista **arrayArtistas, int qtdArtistas)
+{
+    int i;
+
+    for (i = 0; arrayArtistas[i] != NULL || i < qtdArtistas; i++)
+    {
+        ImprimeArtista(arrayArtistas[i]);
     }
 }

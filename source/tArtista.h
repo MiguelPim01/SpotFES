@@ -20,4 +20,6 @@ void LiberaArtista(Artista *a);
 
 void ImprimeArtista(Artista *artista);
 
+char *ObtemIdArtista(Artista *artista);
+
 #endif

@@ -2,7 +2,7 @@
 
 #include "tArtistas.h"
 #include "tMusicas.h"
-#include "tPlaylist.h"
+#include "tPlaylists.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +10,9 @@ int main(int argc, char *argv[])
     Artistas *artistas;
     Musicas *musicas;
     char caminho[500];
+
+    artistas = NULL;
+    musicas = NULL;
 
     // ABERTURA E LEITURA DOS ARQUIVOS
 
@@ -49,64 +52,100 @@ int main(int argc, char *argv[])
     fclose(pFileArtistas);
     fclose(pFileMusicas);
 
-    // Relacionar artistas com as musicas que fazem parte (GUSTAVO)
+    // Relacionar artistas com as musicas que fazem parte
+    RelacionaArrayDeMusicasEArtistas(musicas, artistas);
 
-    int opcao=0, flagBreak=0;
-    char texto[100];
 
     // FUNCIONAMENTO DO PROGRAMA:
-    
-    printf("Selecione uma opção:\n--> ");
 
-    while (scanf("%d", &opcao) == 1)
+    int flagBreak=0, indiceMusica=0, indicePlaylist=0;
+    char opcao, texto[100];
+    Playlists *playlists;
+
+    playlists = InicializaPlaylist();
+    
+    printf("==================================\n");
+    printf("Selecione uma opção:\n");
+    printf("\n1 - Buscar Musica\n2 - Listar Musica\n3 - Criar Playlist\n4 - Listar Playlists\n5 - Listar uma playlist\n6 - Adicionar musica a playlist\n8 - Sair\n");
+    printf("==================================\n");
+    printf("--> ");
+
+    while (scanf("%c", &opcao) == 1)
     {
+        scanf("%*[^\n]");
         scanf("%*c");
         switch (opcao)
         {
             // 1 - Buscar musica:
-            case 1:
-                printf("\nDigite um texto:\n--> ");
+            case '1':
+                printf("\nBusque uma musica:\n--> ");
                 scanf("%[^\n]", texto);
+                scanf("%*c");
                 BuscaMusicas(musicas, texto);
                 
                 break;
 
             // 2 - Listar uma musica:
-            case 2:
-                printf("\nDigite o ID da musica:\n--> ");
-                scanf("%[^\n]", texto);
-                BuscaIndiceDaMusica(musicas, texto);
+            case '2':
+                printf("\nDigite o indice da musica:\n--> ");
+                scanf("%d", &indiceMusica);
+                scanf("%*[^\n]");
+                scanf("%*c");
+                BuscaIndiceDaMusica(musicas, indiceMusica);
                 
                 // 2.1 - Executar uma musica:
                 break;
             
             // 3 - Criar uma playlist:
-            case 3:
+            case '3':
+                printf("\nDigite o nome de sua playlist:\n--> ");
+                scanf("%[^\n]", texto);
+                scanf("%*c");
+
+                AdicionaPlaylist(playlists, texto);
                 
                 break;
 
             // 4 - Listar playlists:
-            case 4:
+            case '4': 
+                ListarPlaylists(playlists);
                 
                 break;
 
             // 5 - Listar uma playlist:
-            case 5:
+            case '5':
+                printf("\nDigite o indice da playlist:\n--> ");
+                scanf("%d", &indiceMusica);
+                scanf("%*[^\n]");
+                scanf("%*c");
+
+                ListaUmaPlaylist(playlists, musicas, indiceMusica);
                 
                 break;
 
             // 6 - Adicionar uma musica na playlist:
-            case 6:
+            case '6':
+                printf("Digite o indice da playlist:\n--> ");
+                scanf("%d", &indicePlaylist);
+                scanf("%*[^\n]");
+                scanf("%*c");
+                
+                printf("\nDigite o indice da musica\n--> ");
+                scanf("%d", &indiceMusica);
+                scanf("%*[^\n]");
+                scanf("%*c");
+
+                AdicionaMusicaPlaylist(playlists, indiceMusica, indicePlaylist);
                 
                 break;
 
             // 7 - Recomendar musicas parecidas com uma playlist:
-            case 7:
+            case '7':
                 
                 break;
 
             // 8 - Gerar relatorio:
-            case 8:
+            case '8':
                 flagBreak = 1;
                 break;
             
@@ -120,13 +159,18 @@ int main(int argc, char *argv[])
             break;
         }
 
-        printf("\nSelecione uma opção:\n--> ");
+        printf("==================================\n");
+        printf("Selecione uma opção:\n");
+        printf("\n1 - Buscar Musica\n2 - Listar Musica\n3 - Criar Playlist\n4 - Listar Playlists\n5 - Listar uma playlist\n6 - Adicionar musica a playlist\n8 - Sair\n");
+        printf("==================================\n");
+        printf("--> ");
 
     } // FIM DO WHILE
 
     // Liberar espaço da memoria
     LiberaMusicas(musicas);
     LiberaArtistas(artistas);
+    LiberaPlaylists(playlists);
 
     return 0;
 }

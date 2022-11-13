@@ -5,9 +5,10 @@
 
 #include "tMusica.h"
 #include "tArtistas.h"
+#include "tArtista.h"
 
 struct tMusica {
-    Artistas *arrayArtistas;
+    Artista **arrayArtistas;
     int qtdArtistas, duracao_ms, popularity, explicit, mode, time_signature, key;
     float tempo, danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence;
     char *id, *nome, *artistas, *id_artistas, *data;
@@ -56,20 +57,22 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
     strncpy(musica->artistas, artistas, tamArtistas);
     strncpy(musica->id_artistas, id_artistas, tamIDArtistas);
     strncpy(musica->data, data, tamData);
+
+    musica->qtdArtistas = RetornaQtdArtistasDaMusica(musica);
 }
 
-void LiberaMusica(Musica *m)
+void LiberaMusica(Musica *musica)
 {
     // Liberando ponteiros que estao na struct
-    //LiberaArtistas(m->arrayArtistas);
-    free(m->id);
-    free(m->nome);
-    free(m->artistas);
-    free(m->id_artistas);
-    free(m->data);
+    free(musica->arrayArtistas);    
+    free(musica->id);
+    free(musica->nome);
+    free(musica->artistas);
+    free(musica->id_artistas);
+    free(musica->data);
 
     // Liberando o ponteiro que aponta para a struct
-    free(m);
+    free(musica);
 }
 
 void ImprimeMusica(Musica *musica)
@@ -79,46 +82,66 @@ void ImprimeMusica(Musica *musica)
 
 int ComparaNomeComTexto(Musica *musica, char *texto)
 {
-    int tamTex=strlen(texto), i=0;
-    char aux[tamTex+1];
+    char *aux = strstr(musica->nome, texto);
 
-    aux[0] = '\0';
-
-    i = tamTex;
-    while (musica->nome[i-1] != '\0')
+    if (aux == NULL)
     {
-        strncpy(aux, musica->nome+(i-tamTex), tamTex);
-
-        if (strncmp(texto, aux, tamTex) == 0)
-        {
-            return 1;
-        }
-        
-        i++;
+        return 0;
     }
 
-    return 0;
+    return 1;
 }
 
-int ComparaIdComTexto(Musica *musica, char *texto)
+void AtribuiArtistasAMusica(Musica *musica, Artistas *a)
 {
-    int tamTex=strlen(texto), i=0;
-    char aux[tamTex+1];
+    musica->arrayArtistas = (Artista **)malloc(sizeof(Artista *)*musica->qtdArtistas);
+    
+    musica->arrayArtistas = ObtemArtistas(musica->arrayArtistas, musica->id_artistas, a, musica->qtdArtistas);
+}
 
-    aux[0] = '\0';
+int RetornaQtdArtistasDaMusica(Musica *m) 
+{
+    int i=0, cont=0;
 
-    i = tamTex;
-    while (musica->id[i-1] != '\0')
+    while (m->id_artistas[i] != '\0') 
     {
-        strncpy(aux, musica->id+(i-tamTex), tamTex);
-
-        if (strncmp(texto, aux, tamTex) == 0)
-        {
-            return 1;
+        if (m->id_artistas[i] == '|') {
+            cont++;
         }
-        
+
         i++;
     }
 
-    return 0;
+    return cont+1;
+}
+
+void PrintaDadosDaMusicaEArtistas(Musica *musica)
+{
+    printf("DADOS DA MUSICA:\n");
+    ImprimeTudoDaMusica(musica);
+    printf("DADOS DOS ARTISTAS:\n");
+    ImprimeVetorDeArtistas(musica->arrayArtistas, musica->qtdArtistas);
+}
+
+void ImprimeTudoDaMusica(Musica *musica)
+{
+    printf("Id: %s\n", musica->id); // id
+    printf("Nome: %s\n", musica->nome); // nome
+    printf("Data de lançamento: %s\n", musica->data); // data
+
+    printf("\nAcousticness: %.3f\n", musica->acousticness);
+    printf("Danceability: %.3f\n", musica->danceability);
+    printf("Duração: %d ms\n", musica->duracao_ms);
+    printf("Energy: %.3f\n", musica->energy);
+    printf("Explicit: %d\n", musica->explicit);
+    printf("Instrumentalness: %.3f\n", musica->instrumentalness);
+    printf("Key: %d\n", musica->key);
+    printf("Liveness: %.3f\n", musica->liveness);
+    printf("Loudness: %.3f\n", musica->loudness);
+    printf("Mode: %d\n", musica->mode);
+    printf("Popularity: %d\n", musica->popularity);
+    printf("Speechness: %.3f\n", musica->speechiness);
+    printf("Tempo: %.3f\n", musica->tempo);
+    printf("Time Signature: %d\n", musica->time_signature);
+    printf("Valence: %.3f\n", musica->valence);
 }

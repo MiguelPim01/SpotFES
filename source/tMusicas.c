@@ -3,6 +3,7 @@
 
 #include "tMusicas.h"
 #include "tMusica.h"
+#include "tArtistas.h"
 
 struct tMusicas {
     Musica **musicas;
@@ -70,6 +71,8 @@ void BuscaMusicas(Musicas *m, char *texto)
 {
     int i=0;
 
+    printf("################\n");
+    printf("Resultado de busca por '%s':\n\n", texto);
     for (i = 0; i < m->qtdMusicas; i++)
     {
         if (ComparaNomeComTexto(m->musicas[i], texto))
@@ -78,18 +81,39 @@ void BuscaMusicas(Musicas *m, char *texto)
             ImprimeMusica(m->musicas[i]);
         }
     }
+    printf("################\n");
 }
 
-void BuscaIndiceDaMusica(Musicas *m, char *id)
+void BuscaIndiceDaMusica(Musicas *m, int indice)
 {
-    int i=0;
+    printf("################\n");
+    if (indice >= m->qtdMusicas)
+    {
+        printf("\nERRO: Indice ultrapassou a quantidade de musicas existentes!\n");
+    }
+    else
+    {
+        PrintaDadosDaMusicaEArtistas(m->musicas[indice]);
+    }
+    printf("################\n");
+}
+
+void ImprimeMusicasPorIndices(Musicas *m, int *arrayIndices, int qtdMusicas)
+{
+    int i;
+
+    for (i = 0; i < qtdMusicas; i++)
+    {
+        ImprimeMusica(m->musicas[arrayIndices[i]]);
+    }
+}
+
+void RelacionaArrayDeMusicasEArtistas(Musicas *m, Artistas *a)
+{
+    int i;
 
     for (i = 0; i < m->qtdMusicas; i++)
     {
-        if (ComparaIdComTexto(m->musicas[i], id))
-        {
-            printf("Indice: %d, ", i);
-            ImprimeMusica(m->musicas[i]);
-        }
+        AtribuiArtistasAMusica(m->musicas[i], a);
     }
 }
