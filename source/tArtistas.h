@@ -17,7 +17,7 @@ void LiberaArtistas(Artistas *a);
 
 void ImprimeDadosDosArtistas(Artistas *a);
 
-Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistas);
+Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistasMusica);
 
 void ImprimeVetorDeArtistas(Artista **arrayArtistas, int qtdArtistas);
 

@@ -65,10 +65,11 @@ void ImprimeDadosDosArtistas(Artistas *a)
     }
 }
 
-Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistas)
+Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistasMusica)
 {
     int i=0, cont=0;
 
+    // Varrer o array de artistas
     for (i = 0; i < a->qtdArtistas; i++)
     {
         if (strstr(id_artistas, ObtemIdArtista(a->artistas[i])) != NULL)
@@ -76,13 +77,14 @@ Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a,
             arrayArtistas[cont] = a->artistas[i];
             cont++;
         }
-        if (cont == qtdArtistas)
+        if (cont == qtdArtistasMusica)
         {
             break;
         }
     }
 
-    if (cont < qtdArtistas)
+    // Colocar um ponteiro NULL no fim do array
+    if (cont < qtdArtistasMusica)
     {
         arrayArtistas[cont] = NULL;
     }
@@ -94,8 +96,12 @@ void ImprimeVetorDeArtistas(Artista **arrayArtistas, int qtdArtistas)
 {
     int i;
 
-    for (i = 0; arrayArtistas[i] != NULL || i < qtdArtistas; i++)
+    for (i = 0; i < qtdArtistas; i++)
     {
+        if (arrayArtistas[i] == NULL)
+        {
+            break;
+        }
         ImprimeArtista(arrayArtistas[i]);
     }
 }

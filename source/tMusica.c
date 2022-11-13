@@ -119,7 +119,7 @@ void PrintaDadosDaMusicaEArtistas(Musica *musica)
 {
     printf("DADOS DA MUSICA:\n");
     ImprimeTudoDaMusica(musica);
-    printf("DADOS DOS ARTISTAS:\n");
+    printf("\nDADOS DOS ARTISTAS:\n");
     ImprimeVetorDeArtistas(musica->arrayArtistas, musica->qtdArtistas);
 }
 
