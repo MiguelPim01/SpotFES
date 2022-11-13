@@ -144,7 +144,7 @@ void ImprimeTudoDaMusica(Musica *musica)
     printf("Duração: %d ms\n", musica->duracao_ms);
     printf("Energy: %.3f\n", musica->energy);
     printf("Explicit: %d\n", musica->explicit);
-    printf("Instrumentalness: %.3f\n", musica->instrumentalness);
+    printf("Instrumentalness: %.10f\n", musica->instrumentalness);
     printf("Key: %d\n", musica->key);
     printf("Liveness: %.3f\n", musica->liveness);
     printf("Loudness: %.3f\n", musica->loudness);

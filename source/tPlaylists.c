@@ -60,9 +60,16 @@ void ListarPlaylists(Playlists *p)
 
 void ListaUmaPlaylist(Playlists *p, Musicas *m, int indice)
 {
-    printf("################\n");
-    ImprimePlaylistEMusicas(p->playlists[indice], m);
-    printf("################\n");
+    if (indice >= 0 && indice < p->qtdPlaylists)
+    {
+        printf("################\n");
+        ImprimePlaylistEMusicas(p->playlists[indice], m);
+        printf("################\n");
+    }
+    else 
+    {
+        printf("ERRO: Valor do indice invalido!\n");
+    }
 }
 
 void AdicionaMusicaPlaylist(Playlists *p, int indiceMusica, int indicePlaylist)
