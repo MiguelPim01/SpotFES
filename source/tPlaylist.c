@@ -8,7 +8,7 @@
 
 struct tPlaylist {
     char *nome;
-    int *indicesDasMusicas, qtdMusicas;
+    int *indicesDasMusicas, qtdMusicas, tamanhoNome;
 };
 
 Playlist *CriaPlaylist(char *nome)
@@ -21,6 +21,7 @@ Playlist *CriaPlaylist(char *nome)
     strncpy(playlist->nome, nome, tamNome);
 
     playlist->qtdMusicas = 0;
+    playlist->tamanhoNome = tamNome;
     playlist->indicesDasMusicas = NULL;
 
     return playlist;

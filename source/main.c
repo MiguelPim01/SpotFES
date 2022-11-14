@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
                 break;
             
             default:
-                printf("Opção Invalida!");
+                printf("Opção Invalida!\n");
                 break;
         } // FIM DO SWITCH
 
