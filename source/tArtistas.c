@@ -70,10 +70,15 @@ Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a,
     int i=0, cont=0;
     char *aux;
 
+    if (qtdArtistasMusica == 0)
+    {
+        return arrayArtistas;
+    }
+
     // Varrer o array de artistas
     for (i = 0; i < a->qtdArtistas; i++)
     {
-        aux = strstr(id_artistas, ObtemIdArtista(a->artistas[i])); // PROBLEMAO
+        aux = strstr(id_artistas, ObtemIdArtista(a->artistas[i]));
 
         if (aux != NULL)
         {
