@@ -6,7 +6,7 @@ typedef struct tArtista Artista;
 /*
  * Faz a leitura de um artista a partir de um buffer
  */
-Artista * LeArtista(char *buffer);
+Artista * LeArtista(char *buffer, int contArtistas);
 
 /*
  * Atribui as strings contidas em Artista para o tipo

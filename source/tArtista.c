@@ -9,14 +9,20 @@ struct tArtista {
     int numSeguidores, popularidade;
 };
 
-Artista * LeArtista(char *buffer) 
+Artista * LeArtista(char *buffer, int contArtista) 
 {
     char id[50], generos[300], nome[100];
 
     // Aloca espaço para um artista
     Artista *artista = (Artista *)malloc(sizeof(Artista));
 
-    sscanf(buffer, "%[^;];%d.0;%[^;];%[^;];%d\n", id, &artista->numSeguidores, generos, nome, &artista->popularidade);
+    if (sscanf(buffer, "%[^;];%d.0;%[^;];%[^;];%d\n", id, &artista->numSeguidores, generos, nome, &artista->popularidade) != 5)
+    {
+        printf("HOUVE UM ERRO NA LEITURA DO ARTISTA! LINHA: %d\n", contArtista);
+    }
+
+    // 07MFWYztDF2wq4U91e4mgg;44.0;-;Louis Armstrong Hot Seven;Carroll Dickerson Orchestra;0
+    // 0SZjEe5ez2iiSUatjjaQGT;2653.0;-;Kumar Sanu;Alka Yagnik;Kavita Krishnamurti;12
 
     FinalizaArtista(artista, id, generos, nome);
 

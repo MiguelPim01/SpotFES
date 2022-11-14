@@ -31,7 +31,7 @@ Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a)
         }
 
         // Cria artista e bota no array de ponteiro de artista
-        a->artistas[contArtistas] = LeArtista(buffer);
+        a->artistas[contArtistas] = LeArtista(buffer, contArtistas+1);
 
         contArtistas++;
     }

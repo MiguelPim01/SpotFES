@@ -14,7 +14,7 @@ struct tMusica {
     char *id, *nome, *artistas, *id_artistas, *data;
 };
 
-Musica *LeMusica(char *buffer)
+Musica *LeMusica(char *buffer, int contMusicas)
 {
     Musica *musica = (Musica *)malloc(sizeof(Musica));
     
@@ -23,10 +23,17 @@ Musica *LeMusica(char *buffer)
     id[0]='\0'; nome[0]='\0'; artistas[0]='\0'; id_artistas[0]='\0'; data[0]='\0'; // Inicializando
     
     // Fazendo leitura da musica
-    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%f;%f;%f;%f;%d\n", 
+    if (sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%f;%f;%f;%f;%d\n", 
         id, nome, &musica->popularity, &musica->duracao_ms, &musica->explicit, artistas, id_artistas, data, 
         &musica->danceability, &musica->energy, &musica->key, &musica->loudness, &musica->mode, &musica->speechiness,
-        &musica->acousticness, &musica->instrumentalness, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature);
+        &musica->acousticness, &musica->instrumentalness, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature) != 20)
+        {
+            printf("ERRO NA LEITURA DA MUSICA! LINHA: %d\n", contMusicas);
+        }
+
+    // 6tjWDKRXOX6JLLlDTmY4F7;Doctor No Go - Dub Cartel' Session; Instrumental Dub Version;20;160333;0;The Hippy Boys;579Ncba3u16DyUSrvxctnx;1969-01-01;0.828;0.715;7;-8.873;1;0.054;0.533;0.875;0.164;0.904;74.264;4
+    // 3AKELG5VNBxeRt4b42hRjI;Celebration Day - (Live at MSG 1973) [Remaster];37;217613;0;Led Zeppelin;36QJpDe2go2KgaRleHCDTp;1976-10-22;0.262;0.979;2;-6.804;1;0.12;6.05e-05;0.00271;0.236;0.1;131.255;4
+
 
     // Atribuindo id, nome, artistas e id_artistas a musica
     FinalizaMusica(musica, id, nome, artistas, id_artistas, data);
