@@ -23,12 +23,12 @@ int main(int argc, char *argv[])
     }
 
     // Abrindo arquivos de artistas
-    sprintf(caminho, "%s", argv[1]);
+    sprintf(caminho, "%s.csv", argv[1]);
     pFileArtistas = fopen(caminho, "r");
 
     if (pFileArtistas == NULL)
     {
-        printf("ERRO: Nao foi possivel abrir o arquivo %s\n", argv[1]);
+        printf("ERRO: Nao foi possivel abrir o arquivo %s.csv\n", argv[1]);
         return 1;
     }
 
@@ -36,12 +36,12 @@ int main(int argc, char *argv[])
     artistas = CarregaArquivoArtistas(pFileArtistas, artistas);
 
     // Abrindo arquivo de musicas
-    sprintf(caminho, "%s", argv[2]);
+    sprintf(caminho, "%s.csv", argv[2]);
     pFileMusicas = fopen(caminho, "r");
 
     if (pFileMusicas == NULL)
     {
-        printf("ERRO: Nao foi possivel abrir %s\n", argv[2]);
+        printf("ERRO: Nao foi possivel abrir %s.csv\n", argv[2]);
         return 1;
     }
 
