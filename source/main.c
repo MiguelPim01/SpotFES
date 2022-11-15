@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-    FILE *pFileMusicas, *pFileArtistas;
+    FILE *pFileMusicas, *pFileArtistas, *pFilePlaylists;
     Artistas *artistas;
     Musicas *musicas;
     char caminho[500];
@@ -58,12 +58,25 @@ int main(int argc, char *argv[])
 
     // FUNCIONAMENTO DO PROGRAMA:
 
-    int flagBreak=0, indiceMusica=0, indicePlaylist=0;
+    int flagBreak=0, indiceMusica=0, indicePlaylist=0, aux;
     char opcao, texto[100];
     Playlists *playlists;
 
-    playlists = InicializaPlaylist();
-    
+    // Abrindo arquivos de playlists
+    sscanf(argv[1], "data/artists_%d", &aux);
+    sprintf(caminho, "playlists_%d.bin", aux);
+    pFilePlaylists = fopen(caminho, "rb");
+
+    if (pFilePlaylists == NULL)
+    {
+        playlists = InicializaPlaylists();
+    }
+    else 
+    {
+        playlists = CarregaArquivoPlaylists(pFilePlaylists);
+        fclose(pFilePlaylists);
+    }
+
     printf("==================================\n");
     printf("Selecione uma opção:\n");
     printf("\n1 - Buscar Musica\n2 - Listar Musica\n3 - Criar Playlist\n4 - Listar Playlists\n5 - Listar uma playlist\n6 - Adicionar musica a playlist\n7 - Recomendar Musica\n8 - Gerar Relatorio e Sair\n");
@@ -166,6 +179,18 @@ int main(int argc, char *argv[])
         printf("--> ");
 
     } // FIM DO WHILE
+
+    pFilePlaylists = fopen(caminho, "wb");
+
+    if (pFilePlaylists == NULL)
+    {
+        printf("ERRO: Nao foi possivel abrir o arquivo %s para escrita\n", caminho);
+    }
+    else 
+    {
+        SalvaPlaylists(playlists, pFilePlaylists);
+        fclose(pFilePlaylists);
+    }
 
     // Liberar espaço da memoria
     LiberaMusicas(musicas);

@@ -11,6 +11,29 @@ struct tPlaylist {
     int *indicesDasMusicas, qtdMusicas, tamanhoNome;
 };
 
+Playlist *LePLaylist(FILE *pFilePlaylists)
+{
+    Playlist *playlist = (Playlist *)malloc(sizeof(Playlist));
+
+    fread(&playlist->qtdMusicas, sizeof(int), 1, pFilePlaylists);
+    playlist->indicesDasMusicas = (int *)malloc(sizeof(int)*playlist->qtdMusicas);
+
+    for (int i = 0; i < playlist->qtdMusicas; i++)
+    {
+        fread(&playlist->indicesDasMusicas[i], sizeof(int), 1, pFilePlaylists);
+    }
+
+    fread(&playlist->tamanhoNome, sizeof(int), 1, pFilePlaylists);
+    playlist->nome = (char *)malloc(sizeof(char)*playlist->tamanhoNome);
+
+    for (int i = 0; i < playlist->tamanhoNome; i++)
+    {
+        fread(&playlist->nome[i], sizeof(char), 1, pFilePlaylists);
+    }
+
+    return playlist;
+}
+
 Playlist *CriaPlaylist(char *nome)
 {
     int tamNome=strlen(nome)+1;
@@ -55,4 +78,21 @@ void AdicionaMusica(Playlist *playlist, int indiceMusica)
     playlist->indicesDasMusicas[playlist->qtdMusicas] = indiceMusica;
 
     playlist->qtdMusicas++;
+}
+
+void EscrevePlaylistBin(Playlist *playlist, FILE *pFilePlaylists)
+{
+    fwrite(&playlist->qtdMusicas, sizeof(int), 1, pFilePlaylists);
+
+    for (int i = 0; i < playlist->qtdMusicas; i++)
+    {
+        fwrite(&playlist->indicesDasMusicas[i], sizeof(int), 1, pFilePlaylists);
+    }
+
+    fwrite(&playlist->tamanhoNome, sizeof(int), 1, pFilePlaylists);
+
+    for (int i = 0; i < playlist->tamanhoNome; i++)
+    {
+        fwrite(&playlist->nome[i], sizeof(char), 1, pFilePlaylists);
+    }
 }
