@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     
     printf("==================================\n");
     printf("Selecione uma opção:\n");
-    printf("\n1 - Buscar Musica\n2 - Listar Musica\n3 - Criar Playlist\n4 - Listar Playlists\n5 - Listar uma playlist\n6 - Adicionar musica a playlist\n8 - Sair\n");
+    printf("\n1 - Buscar Musica\n2 - Listar Musica\n3 - Criar Playlist\n4 - Listar Playlists\n5 - Listar uma playlist\n6 - Adicionar musica a playlist\n7 - Recomendar Musica\n8 - Gerar Relatorio e Sair\n");
     printf("==================================\n");
     printf("--> ");
 
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 
         printf("==================================\n");
         printf("Selecione uma opção:\n");
-        printf("\n1 - Buscar Musica\n2 - Listar Musica\n3 - Criar Playlist\n4 - Listar Playlists\n5 - Listar uma playlist\n6 - Adicionar musica a playlist\n8 - Sair\n");
+        printf("\n1 - Buscar Musica\n2 - Listar Musica\n3 - Criar Playlist\n4 - Listar Playlists\n5 - Listar uma playlist\n6 - Adicionar musica a playlist\n7 - Recomendar Musica\n8 - Gerar Relatorio e Sair\n");
         printf("==================================\n");
         printf("--> ");
 

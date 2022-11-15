@@ -1,10 +1,24 @@
+PROJ_NAME=prog
+
 CC=gcc
 CFLAGS=-lm -g -Wall
 
-DEPS=main.c tArtista.c tMusica.c tPlaylist.c tMusicas.c tArtistas.c tPlaylists.c
+C_SOURCE=$(wildcard *.c)
 
-prog: $(DEPS)
-	$(CC) -o $@ $^ $(CFLAGS)
+H_SOURCE=$(wildcard *.h)
 
-%.o: %.c
-	$(CC) -c -o ../objects/$@ $^ $(CFLAGS)
+OBJ=$(C_SOURCE:%.c=../objects/%.o)
+
+all: $(PROJ_NAME)
+
+$(PROJ_NAME): $(OBJ)
+	$(CC) -o $@ $^
+
+../objects/%.o: %.c %.h
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+../objects/main.o: main.c $(H_SOURCE)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+clean:
+	rm -rf ../objects/*.o $(PROJ_NAME)
