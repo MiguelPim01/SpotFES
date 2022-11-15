@@ -20,6 +20,8 @@ void AdicionaMusica(Playlist *playlist, int indiceMusica);
 
 void EscrevePlaylistBin(Playlist *playlist, FILE *pFilePlaylists);
 
+int RetornaQtdMusicasPlaylist(Playlist *p);
+
 int ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices);
 
 #endif

@@ -24,4 +24,6 @@ void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists);
 
 void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio);
 
+int ObtemTamanhoArrayIndices(Playlists *p);
+
 #endif

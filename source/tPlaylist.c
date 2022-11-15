@@ -97,10 +97,12 @@ void EscrevePlaylistBin(Playlist *playlist, FILE *pFilePlaylists)
     }
 }
 
+int RetornaQtdMusicasPlaylist(Playlist *p) {
+    return p->qtdMusicas;
+}
+
 int ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices) {
     static int k=0;
-
-    arrayIndices = (int *)realloc(arrayIndices, (p->qtdMusicas+1)*sizeof(int));
 
     printf("arr: ");
     for (int i = 0; i < p->qtdMusicas; i++, k++) {

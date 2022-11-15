@@ -116,10 +116,21 @@ void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists)
 }
 
 void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio) {
-    int *arrayIndices = (int *)malloc(sizeof(int)), cont;
+    int tam = ObtemTamanhoArrayIndices(p);
+    int arrayIndices[tam];
 
     for (int i=0; i<p->qtdPlaylists; i++) {
-        cont = ObtemMusicasDaPlaylist(p->playlists[i], arrayIndices);
+        ObtemMusicasDaPlaylist(p->playlists[i], arrayIndices);
     }
-    ImprimeMusicasOrdenadas(m, arrayIndices, cont, pFileRelatorio);
+    ImprimeMusicasOrdenadas(m, arrayIndices, tam, pFileRelatorio);
+}
+
+int ObtemTamanhoArrayIndices(Playlists *p) {
+    int tam;
+
+    for (int i = 0; i < p->qtdPlaylists; i++) {
+        tam = RetornaQtdMusicasPlaylist(p->playlists[i]);
+    }
+
+    return tam;
 }

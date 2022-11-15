@@ -131,11 +131,11 @@ void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE
     i, j, qtdMusicasSaida, cont, aux;
 
     // ERRO NESSE ARRAY DE INDICE
-    printf("arrIndice:\n");
+    /*printf("arrIndice:\n");
     for (i = 0; i < qtdMusicas; i++) {
         if (!i) printf(" - ");
         printf("%d", arrayIndices[i]);
-    }
+    }*/
 
     // Inicializa matriz 1 com elementos do array de indices e frequencia 0
     for (i = 0; i < qtdMusicas; i++) {
