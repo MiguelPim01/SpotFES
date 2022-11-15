@@ -9,7 +9,7 @@ typedef struct tMusica Musica;
 /*
  * Faz a leitura e as alocações necessarias para uma musica
  */
-Musica *LeMusica(char *buffer);
+Musica *LeMusica(char *buffer, int contMusicas);
 
 /*
  * Aloca espaço para as strings contidas em Musica e atribui strings a elas

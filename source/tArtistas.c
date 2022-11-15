@@ -31,7 +31,7 @@ Artistas * CarregaArquivoArtistas(FILE *pFileArtistas, Artistas *a)
         }
 
         // Cria artista e bota no array de ponteiro de artista
-        a->artistas[contArtistas] = LeArtista(buffer);
+        a->artistas[contArtistas] = LeArtista(buffer, contArtistas+1);
 
         contArtistas++;
     }
@@ -70,10 +70,15 @@ Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a,
     int i=0, cont=0;
     char *aux;
 
+    if (qtdArtistasMusica == 0)
+    {
+        return arrayArtistas;
+    }
+
     // Varrer o array de artistas
     for (i = 0; i < a->qtdArtistas; i++)
     {
-        aux = strstr(id_artistas, ObtemIdArtista(a->artistas[i])); // PROBLEMAO
+        aux = strstr(id_artistas, ObtemIdArtista(a->artistas[i]));
 
         if (aux != NULL)
         {

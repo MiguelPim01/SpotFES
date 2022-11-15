@@ -4,15 +4,36 @@
 #include "tPlaylists.h"
 #include "tPlaylist.h"
 #include "tMusicas.h"
-
-#define QTD_PLAYLISTS 3
+#include "tArtistas.h"
 
 struct tPlaylists {
     Playlist **playlists;
     int qtdPlaylists;
 };
 
-Playlists *InicializaPlaylist()
+Playlists *CarregaArquivoPlaylists(FILE *pFilePlaylists)
+{
+    Playlists *p = (Playlists *)malloc(sizeof(Playlists));
+
+    if (fread(&p->qtdPlaylists, sizeof(int), 1, pFilePlaylists) == 1)
+    {   
+        p->playlists = (Playlist **)malloc(sizeof(Playlist *)*p->qtdPlaylists);
+        
+        for (int i = 0; i < p->qtdPlaylists; i++)
+        {
+            p->playlists[i] = LePLaylist(pFilePlaylists);
+        }
+    }
+    else 
+    {
+        p->qtdPlaylists = 0;
+        p->playlists = NULL;
+    }
+
+    return p;
+}
+
+Playlists *InicializaPlaylists()
 {
     Playlists *p = (Playlists *)malloc(sizeof(Playlists));
 
@@ -74,5 +95,31 @@ void ListaUmaPlaylist(Playlists *p, Musicas *m, int indice)
 
 void AdicionaMusicaPlaylist(Playlists *p, int indiceMusica, int indicePlaylist)
 {
-    AdicionaMusica(p->playlists[indicePlaylist], indiceMusica);
+    if (indicePlaylist >= p->qtdPlaylists)
+    {
+        printf("ERRO: indice ultrapassou quantidade de playlists!\n");
+    }
+    else 
+    {
+        AdicionaMusica(p->playlists[indicePlaylist], indiceMusica);
+    }
+}
+
+void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists)
+{
+    fwrite(&p->qtdPlaylists, sizeof(int), 1, pFilePlaylists);
+
+    for (int i = 0; i < p->qtdPlaylists; i++)
+    {
+        EscrevePlaylistBin(p->playlists[i], pFilePlaylists);
+    }
+}
+
+void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio) {
+    int *arrayIndices = (int *)malloc(sizeof(int)), cont;
+
+    for (int i=0; i<p->qtdPlaylists; i++) {
+        cont = ObtemMusicasDaPlaylist(p->playlists[i], arrayIndices);
+    }
+    ImprimeMusicasOrdenadas(m, arrayIndices, cont, pFileRelatorio);
 }

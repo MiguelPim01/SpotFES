@@ -40,4 +40,6 @@ void RelacionaArrayDeMusicasEArtistas(Musicas *m, Artistas *a);
  */
 void RelacionaArraysMusicasEArtistas(Musicas *m, Artistas *as);
 
+void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE *pFileRelatorio);
+
 #endif

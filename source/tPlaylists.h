@@ -2,10 +2,13 @@
 #define _TPLAYLISTS_H_
 
 #include "tMusicas.h"
+#include "tArtistas.h"
 
 typedef struct tPlaylists Playlists;
 
-Playlists *InicializaPlaylist();
+Playlists *CarregaArquivoPlaylists(FILE *pFilePlaylists);
+
+Playlists *InicializaPlaylists();
 
 void AdicionaPlaylist(Playlists *p, char *nome);
 
@@ -16,5 +19,9 @@ void ListarPlaylists(Playlists *p);
 void ListaUmaPlaylist(Playlists *p, Musicas *m, int indice);
 
 void AdicionaMusicaPlaylist(Playlists *p, int indiceMusica, int indicePlaylist);
+
+void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists);
+
+void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio);
 
 #endif

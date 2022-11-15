@@ -14,7 +14,7 @@ struct tMusica {
     char *id, *nome, *artistas, *id_artistas, *data;
 };
 
-Musica *LeMusica(char *buffer)
+Musica *LeMusica(char *buffer, int contMusicas)
 {
     Musica *musica = (Musica *)malloc(sizeof(Musica));
     
@@ -23,10 +23,14 @@ Musica *LeMusica(char *buffer)
     id[0]='\0'; nome[0]='\0'; artistas[0]='\0'; id_artistas[0]='\0'; data[0]='\0'; // Inicializando
     
     // Fazendo leitura da musica
-    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%f;%f;%f;%f;%d\n", 
+    if (sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%f;%f;%f;%f;%d\n", 
         id, nome, &musica->popularity, &musica->duracao_ms, &musica->explicit, artistas, id_artistas, data, 
         &musica->danceability, &musica->energy, &musica->key, &musica->loudness, &musica->mode, &musica->speechiness,
-        &musica->acousticness, &musica->instrumentalness, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature);
+        &musica->acousticness, &musica->instrumentalness, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature) != 20)
+        {
+            printf("ERRO NA LEITURA DA MUSICA! LINHA: %d\n", contMusicas);
+        }
+
 
     // Atribuindo id, nome, artistas e id_artistas a musica
     FinalizaMusica(musica, id, nome, artistas, id_artistas, data);
@@ -75,11 +79,11 @@ void LiberaMusica(Musica *musica)
 
 void ImprimeMusica(Musica *musica)
 {
-    // printf("id: %s, nome: %s, artistas: %s\n", musica->id, musica->nome, musica->artistas);
-    int i, qtd = RetornaQtdArtistasDaMusica(musica);
+    printf("id: %s, nome: %s, artistas: %s\n", musica->id, musica->nome, musica->artistas);
+    /*int i, qtd = RetornaQtdArtistasDaMusica(musica);
     for(i=0; i<qtd; i++) {
         ImprimeArtista(musica->arrayArtistas[i]);
-    }
+    }*/
 }
 
 int ComparaNomeComTexto(Musica *musica, char *texto)

@@ -8,8 +8,31 @@
 
 struct tPlaylist {
     char *nome;
-    int *indicesDasMusicas, qtdMusicas;
+    int *indicesDasMusicas, qtdMusicas, tamanhoNome;
 };
+
+Playlist *LePLaylist(FILE *pFilePlaylists)
+{
+    Playlist *playlist = (Playlist *)malloc(sizeof(Playlist));
+
+    fread(&playlist->qtdMusicas, sizeof(int), 1, pFilePlaylists);
+    playlist->indicesDasMusicas = (int *)malloc(sizeof(int)*playlist->qtdMusicas);
+
+    for (int i = 0; i < playlist->qtdMusicas; i++)
+    {
+        fread(&playlist->indicesDasMusicas[i], sizeof(int), 1, pFilePlaylists);
+    }
+
+    fread(&playlist->tamanhoNome, sizeof(int), 1, pFilePlaylists);
+    playlist->nome = (char *)malloc(sizeof(char)*playlist->tamanhoNome);
+
+    for (int i = 0; i < playlist->tamanhoNome; i++)
+    {
+        fread(&playlist->nome[i], sizeof(char), 1, pFilePlaylists);
+    }
+
+    return playlist;
+}
 
 Playlist *CriaPlaylist(char *nome)
 {
@@ -21,6 +44,7 @@ Playlist *CriaPlaylist(char *nome)
     strncpy(playlist->nome, nome, tamNome);
 
     playlist->qtdMusicas = 0;
+    playlist->tamanhoNome = tamNome;
     playlist->indicesDasMusicas = NULL;
 
     return playlist;
@@ -54,4 +78,37 @@ void AdicionaMusica(Playlist *playlist, int indiceMusica)
     playlist->indicesDasMusicas[playlist->qtdMusicas] = indiceMusica;
 
     playlist->qtdMusicas++;
+}
+
+void EscrevePlaylistBin(Playlist *playlist, FILE *pFilePlaylists)
+{
+    fwrite(&playlist->qtdMusicas, sizeof(int), 1, pFilePlaylists);
+
+    for (int i = 0; i < playlist->qtdMusicas; i++)
+    {
+        fwrite(&playlist->indicesDasMusicas[i], sizeof(int), 1, pFilePlaylists);
+    }
+
+    fwrite(&playlist->tamanhoNome, sizeof(int), 1, pFilePlaylists);
+
+    for (int i = 0; i < playlist->tamanhoNome; i++)
+    {
+        fwrite(&playlist->nome[i], sizeof(char), 1, pFilePlaylists);
+    }
+}
+
+int ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices) {
+    static int k=0;
+
+    arrayIndices = (int *)realloc(arrayIndices, (p->qtdMusicas+1)*sizeof(int));
+
+    printf("arr: ");
+    for (int i = 0; i < p->qtdMusicas; i++, k++) {
+        if (i) printf("- ");
+        arrayIndices[k] = p->indicesDasMusicas[i];
+        printf("%d ", arrayIndices[k]);
+    }
+    printf("\n");
+    
+    return k;
 }
