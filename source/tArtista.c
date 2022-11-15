@@ -58,5 +58,10 @@ void LiberaArtista(Artista *a)
 
 void ImprimeArtista(Artista *artista)
 {
-    printf("%s \\ %d \\ %s \\ %s \\ %d", artista->id, artista->numSeguidores, artista->generos, artista->nome, artista->popularidade);
+    printf("id: %s, nome: %s, Seguidores: %d, generos: %s, popularidade: %d\n", artista->id,  artista->nome, artista->numSeguidores, artista->generos, artista->popularidade);
+}
+
+char *ObtemIdArtista(Artista *artista)
+{
+    return artista->id;
 }

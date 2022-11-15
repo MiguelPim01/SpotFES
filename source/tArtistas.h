@@ -2,6 +2,8 @@
 #define _TARTISTAS_H_
 #include "tArtista.h"
 
+#include "tArtista.h"
+
 typedef struct tArtistas Artistas;
 
 /*
@@ -16,6 +18,8 @@ void LiberaArtistas(Artistas *a);
 
 void ImprimeDadosDosArtistas(Artistas *a);
 
-Artista * RetornaArtista(Artistas *as, char *id);
+Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistasMusica);
+
+void ImprimeVetorDeArtistas(Artista **arrayArtistas, int qtdArtistas);
 
 #endif

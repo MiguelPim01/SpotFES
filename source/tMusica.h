@@ -2,6 +2,8 @@
 #define _TMUSICA_H_
 #include "tArtistas.h"
 
+#include "tArtistas.h"
+
 typedef struct tMusica Musica;
 
 /*
@@ -34,15 +36,12 @@ int ComparaNomeComTexto(Musica *musica, char *texto);
  */
 int ComparaIdComTexto(Musica *musica, char *texto);
 
-/*
- * 
- */
-void AtribuiArtistasAMusica(Musica *m, Artistas *as);
+void AtribuiArtistasAMusica(Musica *musica, Artistas *a);
 
-/*
- * Varre a string idArtistas da struct e retorna a quantidade de artistas que essa musica possui
- */
 int RetornaQtdArtistasDaMusica(Musica *m);
 
+void PrintaDadosDaMusicaEArtistas(Musica *musica);
+
+void ImprimeTudoDaMusica(Musica *musica);
 
 #endif

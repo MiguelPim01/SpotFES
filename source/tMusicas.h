@@ -2,6 +2,8 @@
 #define _TMUSICAS_H_
 #include "tArtistas.h"
 
+#include "tArtistas.h"
+
 typedef struct tMusicas Musicas;
 
 /*
@@ -27,7 +29,11 @@ void BuscaMusicas(Musicas *m, char *texto);
 /*
  * Faz a busca de uma musica dado o seu id e exibe na tela as informações da musica
  */
-void BuscaIndiceDaMusica(Musicas *m, char *id);
+void BuscaIndiceDaMusica(Musicas *m, int indice);
+
+void ImprimeMusicasPorIndices(Musicas *m, int *arrayIndices, int qtdMusicas);
+
+void RelacionaArrayDeMusicasEArtistas(Musicas *m, Artistas *a);
 
 /*
  * Varre a array de musicas para enviar cada música para outra função que verifica os artistas correspondentes

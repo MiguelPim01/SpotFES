@@ -18,17 +18,15 @@ Musica *LeMusica(char *buffer)
 {
     Musica *musica = (Musica *)malloc(sizeof(Musica));
     
-    float aux1=0;
-    int aux2=0;
+
     char id[70], nome[200], artistas[900], id_artistas[1060], data[50];
+    id[0]='\0'; nome[0]='\0'; artistas[0]='\0'; id_artistas[0]='\0'; data[0]='\0'; // Inicializando
     
     // Fazendo leitura da musica
-    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%fe%d;%f;%f;%f;%d\n", 
+    sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%f;%f;%f;%f;%d\n", 
         id, nome, &musica->popularity, &musica->duracao_ms, &musica->explicit, artistas, id_artistas, data, 
         &musica->danceability, &musica->energy, &musica->key, &musica->loudness, &musica->mode, &musica->speechiness,
-        &musica->acousticness, &aux1, &aux2, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature);
-
-    musica->instrumentalness = aux1*pow(10, aux2);
+        &musica->acousticness, &musica->instrumentalness, &musica->liveness, &musica->valence, &musica->tempo, &musica->time_signature);
 
     // Atribuindo id, nome, artistas e id_artistas a musica
     FinalizaMusica(musica, id, nome, artistas, id_artistas, data);
@@ -40,7 +38,7 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
 {
     int tamID=strlen(id)+1;
     int tamNome=strlen(nome)+1; 
-    int tamArtistas=strlen(artistas)+1; 
+    int tamArtistas=strlen(artistas)+1;
     int tamIDArtistas=strlen(id_artistas)+1;
     int tamData=strlen(data)+1;
     
@@ -57,20 +55,22 @@ void FinalizaMusica(Musica *musica, char *id, char *nome, char *artistas, char *
     strncpy(musica->artistas, artistas, tamArtistas);
     strncpy(musica->id_artistas, id_artistas, tamIDArtistas);
     strncpy(musica->data, data, tamData);
+
+    musica->qtdArtistas = RetornaQtdArtistasDaMusica(musica);
 }
 
-void LiberaMusica(Musica *m)
+void LiberaMusica(Musica *musica)
 {
     // Liberando ponteiros que estao na struct
-    //LiberaArtistas(m->arrayArtistas);
-    free(m->id);
-    free(m->nome);
-    free(m->artistas);
-    free(m->id_artistas);
-    free(m->data);
+    free(musica->arrayArtistas);    
+    free(musica->id);
+    free(musica->nome);
+    free(musica->artistas);
+    free(musica->id_artistas);
+    free(musica->data);
 
     // Liberando o ponteiro que aponta para a struct
-    free(m);
+    free(musica);
 }
 
 void ImprimeMusica(Musica *musica)
@@ -84,82 +84,66 @@ void ImprimeMusica(Musica *musica)
 
 int ComparaNomeComTexto(Musica *musica, char *texto)
 {
-    int tamTex=strlen(texto), i=0;
-    char aux[tamTex+1];
+    char *aux = strstr(musica->nome, texto);
 
-    aux[0] = '\0';
-
-    i = tamTex;
-    while (musica->nome[i-1] != '\0')
+    if (aux == NULL)
     {
-        strncpy(aux, musica->nome+(i-tamTex), tamTex);
-
-        if (strncmp(texto, aux, tamTex) == 0)
-        {
-            return 1;
-        }
-        
-        i++;
+        return 0;
     }
 
-    return 0;
+    return 1;
 }
 
-int ComparaIdComTexto(Musica *musica, char *texto)
+void AtribuiArtistasAMusica(Musica *musica, Artistas *a)
 {
-    int tamTex=strlen(texto), i=0;
-    char aux[tamTex+1];
-
-    aux[0] = '\0';
-
-    i = tamTex;
-    while (musica->id[i-1] != '\0')
-    {
-        strncpy(aux, musica->id+(i-tamTex), tamTex);
-
-        if (strncmp(texto, aux, tamTex) == 0)
-        {
-            return 1;
-        }
-        
-        i++;
-    }
-
-    return 0;
-}
-
-void AtribuiArtistasAMusica(Musica *m, Artistas *as) {
-    char id[15][30];
-    int i, contPosicaoArray=0, qtdArtistasMus = RetornaQtdArtistasDaMusica(m);
-    printf("%d ", qtdArtistasMus);
+    musica->arrayArtistas = (Artista **)malloc(sizeof(Artista *)*musica->qtdArtistas);
     
-    for (i=1; i<=qtdArtistasMus; i++) {
-        /* Caso seja o último artista lido, lê até o ';' que sinaliza o final
-        e não até a '|' que separa os artistas */
-        if (i == qtdArtistasMus) {
-            // Ajeitar essa leitura de strings aqui de um jeito q ele le cada artista e armazena na matriz
-            sscanf(m->id_artistas, "%[^;];", id[qtdArtistasMus-1]);
-        } else {
-            sscanf(m->id_artistas, "%[^|]|", id[qtdArtistasMus-1]);
-        }
-        printf("%s\n", id[qtdArtistasMus-1]);
-        // Varre array artistas para procurar aquele que tem id igual ao verificado
-        m->arrayArtistas[contPosicaoArray] = RetornaArtista(as, id[qtdArtistasMus-1]);
-        contPosicaoArray++;
-    }
+    musica->arrayArtistas = ObtemArtistas(musica->arrayArtistas, musica->id_artistas, a, musica->qtdArtistas);
 }
 
-int RetornaQtdArtistasDaMusica(Musica *m) {
-    int i=0, cont=1;
+int RetornaQtdArtistasDaMusica(Musica *m) 
+{
+    int i=0, cont=0;
 
-    while (1) {
+    while (m->id_artistas[i] != '\0') 
+    {
         if (m->id_artistas[i] == '|') {
             cont++;
         }
-        if (m->id_artistas[i] == ';') {
-            // printf("%d\n", cont);
-            return cont;
-        }
+
         i++;
     }
+
+    return cont+1;
+}
+
+void PrintaDadosDaMusicaEArtistas(Musica *musica)
+{
+    printf("DADOS DA MUSICA:\n");
+    ImprimeTudoDaMusica(musica);
+    printf("\nDADOS DOS ARTISTAS:\n");
+    ImprimeVetorDeArtistas(musica->arrayArtistas, musica->qtdArtistas);
+}
+
+void ImprimeTudoDaMusica(Musica *musica)
+{
+    printf("Id: %s\n", musica->id); // id
+    printf("Nome: %s\n", musica->nome); // nome
+    printf("Data de lançamento: %s\n", musica->data); // data
+
+    printf("\nAcousticness: %.3f\n", musica->acousticness);
+    printf("Danceability: %.3f\n", musica->danceability);
+    printf("Duração: %d ms\n", musica->duracao_ms);
+    printf("Energy: %.3f\n", musica->energy);
+    printf("Explicit: %d\n", musica->explicit);
+    printf("Instrumentalness: %.10f\n", musica->instrumentalness);
+    printf("Key: %d\n", musica->key);
+    printf("Liveness: %.3f\n", musica->liveness);
+    printf("Loudness: %.3f\n", musica->loudness);
+    printf("Mode: %d\n", musica->mode);
+    printf("Popularity: %d\n", musica->popularity);
+    printf("Speechness: %.3f\n", musica->speechiness);
+    printf("Tempo: %.3f\n", musica->tempo);
+    printf("Time Signature: %d\n", musica->time_signature);
+    printf("Valence: %.3f\n", musica->valence);
 }

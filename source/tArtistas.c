@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "tArtistas.h"
 #include "tArtista.h"
@@ -64,12 +65,46 @@ void ImprimeDadosDosArtistas(Artistas *a)
     }
 }
 
-Artista * RetornaArtista(Artistas *as, char *id) {
-    int i;
-    
-    for (i=0; i<as->qtdArtistas; i++) {
-        if (IdIgualAoArtista(as->artistas[i], id)) {
-            return as->artistas[i];
+Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistasMusica)
+{
+    int i=0, cont=0;
+    char *aux;
+
+    // Varrer o array de artistas
+    for (i = 0; i < a->qtdArtistas; i++)
+    {
+        aux = strstr(id_artistas, ObtemIdArtista(a->artistas[i])); // PROBLEMAO
+
+        if (aux != NULL)
+        {
+            arrayArtistas[cont] = a->artistas[i];
+            cont++;
         }
+        if (cont == qtdArtistasMusica)
+        {
+            break;
+        }
+    }
+
+    // Colocar um ponteiro NULL no fim do array
+    if (cont < qtdArtistasMusica)
+    {
+        arrayArtistas[cont] = NULL;
+    }
+
+    return arrayArtistas;
+}
+
+void ImprimeVetorDeArtistas(Artista **arrayArtistas, int qtdArtistas)
+{
+    int i;
+
+    for (i = 0; i < qtdArtistas; i++)
+    {
+        if (arrayArtistas[i] == NULL)
+        {
+            break;
+        }
+        ImprimeArtista(arrayArtistas[i]);
     }
 }
