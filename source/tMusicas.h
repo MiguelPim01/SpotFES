@@ -33,13 +33,19 @@ void BuscaIndiceDaMusica(Musicas *m, int indice);
 
 void ImprimeMusicasPorIndices(Musicas *m, int *arrayIndices, int qtdMusicas);
 
-void RelacionaArrayDeMusicasEArtistas(Musicas *m, Artistas *a);
-
 /*
  * Varre a array de musicas para enviar cada música para outra função que verifica os artistas correspondentes
  */
 void RelacionaArraysMusicasEArtistas(Musicas *m, Artistas *as);
 
+int RetornaQtdMusicas(Musicas *m);
+
 void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE *pFileRelatorio);
+
+int OrdenaPorFrequenciaERetornaQtd(int *arrayIndices, int qtd);
+
+void OrdenaArrayPorDistancia(Musicas *m, float *mediaPlaylist, int *arrayIndicesMusicas);
+
+void ImprimeRecomendacoes(Musicas *m, int *arrayIndicesMusicas, int k);
 
 #endif

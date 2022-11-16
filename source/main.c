@@ -53,12 +53,12 @@ int main(int argc, char *argv[])
     fclose(pFileMusicas);
 
     // Relacionar artistas com as musicas que fazem parte
-    RelacionaArrayDeMusicasEArtistas(musicas, artistas);
+    RelacionaArraysMusicasEArtistas(musicas, artistas);
 
 
     // FUNCIONAMENTO DO PROGRAMA:
 
-    int flagBreak=0, indiceMusica=0, indicePlaylist=0, aux;
+    int flagBreak=0, indiceMusica=0, indicePlaylist=0, qtdMusicas=0, aux;
     char opcao, texto[100];
     Playlists *playlists;
 
@@ -145,12 +145,10 @@ int main(int argc, char *argv[])
                 printf("Digite o indice da playlist:\n--> ");
                 scanf("%d", &indicePlaylist);
                 scanf("%*[^\n]");
-                scanf("%*c");
                 
                 printf("\nDigite o indice da musica\n--> ");
                 scanf("%d", &indiceMusica);
                 scanf("%*[^\n]");
-                scanf("%*c");
 
                 AdicionaMusicaPlaylist(playlists, indiceMusica, indicePlaylist);
                 
@@ -158,7 +156,17 @@ int main(int argc, char *argv[])
 
             // 7 - Recomendar musicas parecidas com uma playlist:
             case '7':
-                
+                printf("Digite o indice da playlist:\n--> ");
+                scanf("%d", &indicePlaylist);
+                scanf("%*[^\n]");
+                scanf("%*c");
+
+                printf("Digite a quantidade de músicas:\n--> ");
+                scanf("%d", &qtdMusicas);
+                scanf("%*[^\n]");
+                scanf("%*c");
+
+                RecomendaMusicas(playlists, musicas, indicePlaylist, qtdMusicas);
                 break;
 
             // 8 - Gerar relatorio:

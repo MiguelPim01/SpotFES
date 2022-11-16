@@ -22,6 +22,8 @@ void EscrevePlaylistBin(Playlist *playlist, FILE *pFilePlaylists);
 
 int RetornaQtdMusicasPlaylist(Playlist *p);
 
-int ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices);
+void ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices);
+
+void CalculaMediaPlaylist(Playlist *p, float *mediaPlaylist);
 
 #endif

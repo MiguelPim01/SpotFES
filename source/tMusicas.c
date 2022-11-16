@@ -108,7 +108,7 @@ void ImprimeMusicasPorIndices(Musicas *m, int *arrayIndices, int qtdMusicas)
     }
 }
 
-void RelacionaArrayDeMusicasEArtistas(Musicas *m, Artistas *a)
+void RelacionaArraysMusicasEArtistas(Musicas *m, Artistas *a)
 {
     int i;
 
@@ -118,70 +118,109 @@ void RelacionaArrayDeMusicasEArtistas(Musicas *m, Artistas *a)
     }
 }
 
-void RelacionaArraysMusicasEArtistas(Musicas *m, Artistas *as) {
-    int i;
+void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE *pFileRelatorio)
+{
+    int i, qtdMusicasSaida, arrayIndicesMusicas[qtdMusicas];
 
-    for (i=0; i<m->qtdMusicas; i++) {
-        AtribuiArtistasAMusica(m->musicas[i], as);
+    for (i = 0; i < qtdMusicas; i++)
+    {
+        arrayIndicesMusicas[i] = arrayIndices[i];
+    }
+
+    qtdMusicasSaida = OrdenaPorFrequenciaERetornaQtd(arrayIndicesMusicas, qtdMusicas);
+
+    //Imprime as musicas em ordem
+    for (i = 0; i < qtdMusicasSaida; i++)
+    {
+        ImprimeMusicaRelatorio(m->musicas[arrayIndicesMusicas[i]], pFileRelatorio);
     }
 }
 
-void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE *pFileRelatorio) {
-    int matrizAux[qtdMusicas][2], matrizSaida[qtdMusicas][2],
+int OrdenaPorFrequenciaERetornaQtd(int *arrayIndices, int qtd)
+{
+    // Matrizes para armazenar as músicas (coluna 0) e frequência (coluna 1)
+    int matrizAux[qtd][2], matrizSaida[qtd][2],
     i, j, qtdMusicasSaida, cont, aux;
 
-    // ERRO NESSE ARRAY DE INDICE
-    /*printf("arrIndice:\n");
-    for (i = 0; i < qtdMusicas; i++) {
-        if (!i) printf(" - ");
-        printf("%d", arrayIndices[i]);
-    }*/
-
     // Inicializa matriz 1 com elementos do array de indices e frequencia 0
-    for (i = 0; i < qtdMusicas; i++) {
+    for (i = 0; i < qtd; i++)
+    {
         matrizAux[i][0] = arrayIndices[i];
         matrizAux[i][1] = 0;
-        // printf("%d", matrizAux[i][0]);
     }
 
     // Armazena os índices únicos e suas respectivas frequências na matriz 2
-    for (i = 0, qtdMusicasSaida = 0; i < qtdMusicas; i++) {
-        if (matrizAux[i][1]) {
+    for (i = 0, qtdMusicasSaida = 0; i < qtd; i++)
+    {
+        if (matrizAux[i][1])
+        {
             continue;
         }
         cont = 0;
-        for (j = i+1; j < qtdMusicas; j++) {
-            if (matrizAux[i][0] == matrizAux[j][0]) {
+        for (j = i+1; j < qtd; j++)
+        {
+            if (matrizAux[i][0] == matrizAux[j][0])
+            {
                 matrizAux[j][1] = 1;
                 cont++;
             }
         }
         matrizSaida[qtdMusicasSaida][0] = matrizAux[i][0];
         matrizSaida[qtdMusicasSaida][1] = cont+1;
-        // printf("\n%d", matrizSaida[qtdMusicasSaida][0]);
         qtdMusicasSaida++;
     }
-    qtdMusicas = qtdMusicasSaida;
+    qtd = qtdMusicasSaida;
 
     // Ordena elementos por frequência decrescente
-    for (i = 0; i < qtdMusicas; i++) {
-        for (j = i+1; j < qtdMusicas; j++) {
-            if (matrizSaida[i][1] < matrizSaida[j][1]) {
+    for (i = 0; i < qtd; i++)
+    {
+        for (j = i+1; j < qtd; j++)
+        {
+            if (matrizSaida[i][1] < matrizSaida[j][1])
+            {
                 aux = matrizSaida[i][0];
                 matrizSaida[i][0] = matrizSaida[j][0];
                 matrizSaida[j][0] = aux;
-
-                aux = matrizSaida[i][1];
-                matrizSaida[i][1] = matrizSaida[j][1];
-                matrizSaida[j][1] = aux;
             }
         }
     }
 
-    i = 0;
-    //Imprime as musicas em ordem
-    while (i != qtdMusicasSaida) {
-        ImprimeMusica(m->musicas[matrizSaida[i][0]]);
-        i++;
+    for (i = 0; i < qtd; i++)
+    {
+        arrayIndices[i] = matrizSaida[i][0];
+    }
+
+    return qtd;
+}
+
+int RetornaQtdMusicas(Musicas *m)
+{
+    return m->qtdMusicas;
+}
+
+void OrdenaArrayPorDistancia(Musicas *m, float *mediaPlaylist, int *arrayIndicesMusicas) {
+    int i, j;
+    float distancia1, distancia2, aux;
+
+    for (i = 0; i < m->qtdMusicas; i++)
+    {
+        distancia1 = CalculaDistancia(mediaPlaylist, m->musicas[i]);
+        for (j = i+1; j < m->qtdMusicas; j++)
+        {
+            distancia2 = CalculaDistancia(mediaPlaylist, m->musicas[j]);
+            if (distancia1 > distancia2)
+            {
+                aux = arrayIndicesMusicas[i];
+                arrayIndicesMusicas[i] = arrayIndicesMusicas[j];
+                arrayIndicesMusicas[j] = aux;
+            }
+        }
+    }
+}
+
+void ImprimeRecomendacoes(Musicas *m, int *arrayIndicesMusicas, int k)
+{
+    for (int i = 0; i < k; i++) {
+        ImprimeMusica(m->musicas[arrayIndicesMusicas[k]]);
     }
 }

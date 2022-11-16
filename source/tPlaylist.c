@@ -36,7 +36,7 @@ Playlist *LePLaylist(FILE *pFilePlaylists)
 
 Playlist *CriaPlaylist(char *nome)
 {
-    int tamNome=strlen(nome)+1;
+    int tamNome = strlen(nome)+1;
 
     Playlist *playlist = (Playlist *)malloc(sizeof(Playlist));
     playlist->nome = (char *)malloc(sizeof(char)*tamNome);
@@ -97,20 +97,36 @@ void EscrevePlaylistBin(Playlist *playlist, FILE *pFilePlaylists)
     }
 }
 
-int RetornaQtdMusicasPlaylist(Playlist *p) {
+int RetornaQtdMusicasPlaylist(Playlist *p)
+{
     return p->qtdMusicas;
 }
 
-int ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices) {
+void ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices)
+{
     static int k=0;
 
-    printf("arr: ");
-    for (int i = 0; i < p->qtdMusicas; i++, k++) {
-        if (i) printf("- ");
+    for (int i = 0; i < p->qtdMusicas; i++, k++)
+    {
         arrayIndices[k] = p->indicesDasMusicas[i];
-        printf("%d ", arrayIndices[k]);
+    }
+}
+
+void CalculaMediaPlaylist(Playlist *p, Musicas *m, float *mediaPlaylist)
+{
+    int i;
+
+    AdicionaValoresCaracteristicas(m, mediaPlaylist);
+
+    for (i = 0; i < 8; i++)
+    {
+        mediaPlaylist[i] /= p->qtdMusicas;
+    }
+
+    for (i = 0; i < 8; i++)
+    {
+        if (i) printf(" - ");
+        printf("%.2f", mediaPlaylist[i]);
     }
     printf("\n");
-    
-    return k;
 }

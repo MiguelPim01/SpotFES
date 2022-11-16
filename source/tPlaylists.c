@@ -115,22 +115,38 @@ void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists)
     }
 }
 
-void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio) {
+void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio)
+{
     int tam = ObtemTamanhoArrayIndices(p);
     int arrayIndices[tam];
 
-    for (int i=0; i<p->qtdPlaylists; i++) {
+    for (int i = 0; i < p->qtdPlaylists; i++)
+    {
         ObtemMusicasDaPlaylist(p->playlists[i], arrayIndices);
     }
     ImprimeMusicasOrdenadas(m, arrayIndices, tam, pFileRelatorio);
 }
 
-int ObtemTamanhoArrayIndices(Playlists *p) {
-    int tam;
+int ObtemTamanhoArrayIndices(Playlists *p)
+{
+    int i, tam = 0;
 
-    for (int i = 0; i < p->qtdPlaylists; i++) {
-        tam = RetornaQtdMusicasPlaylist(p->playlists[i]);
+    for (i = 0; i < p->qtdPlaylists; i++)
+    {
+        tam += RetornaQtdMusicasPlaylist(p->playlists[i]);
     }
 
     return tam;
+}
+
+void RecomendaMusicas(Playlists *p, Musicas *m, int indicePlaylist, int k)
+{
+    int i, j, qtdMusicas = RetornaQtdMusicas(m);
+    float mediaPlaylist[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,}, arrayIndicesMusicas[qtdMusicas];
+
+    CalculaMediaPlaylist(p->playlists[indicePlaylist], mediaPlaylist);
+
+    // OrdenaArrayPorDistancia(m, mediaPlaylist, arrayIndicesMusicas);
+
+    ImprimeRecomendacoes(m, arrayIndicesMusicas, k);
 }

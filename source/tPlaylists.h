@@ -20,10 +20,12 @@ void ListaUmaPlaylist(Playlists *p, Musicas *m, int indice);
 
 void AdicionaMusicaPlaylist(Playlists *p, int indiceMusica, int indicePlaylist);
 
+int ObtemTamanhoArrayIndices(Playlists *p);
+
+void RecomendaMusicas(Playlists *p, Musicas *m, int indicePlaylist, int k);
+
 void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists);
 
 void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio);
-
-int ObtemTamanhoArrayIndices(Playlists *p);
 
 #endif

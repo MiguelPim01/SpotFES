@@ -151,3 +151,20 @@ void ImprimeTudoDaMusica(Musica *musica)
     printf("Time Signature: %d\n", musica->time_signature);
     printf("Valence: %.3f\n", musica->valence);
 }
+
+void ImprimeMusicaRelatorio(Musica *m, FILE *pFileRelatorio) 
+{
+    fprintf(pFileRelatorio, "id: %s, nome: %s, artistas: %s\n", m->id, m->nome, m->artistas);
+}
+
+void AdicionaValoresCaracteristicas(Musica *m, float *mediaPlaylist)
+{
+    mediaPlaylist[0] += m->danceability;
+    mediaPlaylist[1] += m->energy;
+    mediaPlaylist[2] += m->mode;
+    mediaPlaylist[3] += m->speechiness;
+    mediaPlaylist[4] += m->acousticness;
+    mediaPlaylist[5] += m->instrumentalness;
+    mediaPlaylist[6] += m->liveness;
+    mediaPlaylist[7] += m->valence;
+}

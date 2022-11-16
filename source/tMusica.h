@@ -40,8 +40,12 @@ void AtribuiArtistasAMusica(Musica *musica, Artistas *a);
 
 int RetornaQtdArtistasDaMusica(Musica *m);
 
+void AdicionaValoresCaracteristicas(Musica *m, float *mediaPlaylist);
+
 void PrintaDadosDaMusicaEArtistas(Musica *musica);
 
 void ImprimeTudoDaMusica(Musica *musica);
+
+void ImprimeMusicaRelatorio(Musica *m, FILE *pFileRelatorio);
 
 #endif
