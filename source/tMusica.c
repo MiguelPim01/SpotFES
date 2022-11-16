@@ -168,3 +168,21 @@ void AdicionaValoresCaracteristicas(Musica *m, float *mediaPlaylist)
     mediaPlaylist[6] += m->liveness;
     mediaPlaylist[7] += m->valence;
 }
+
+float CalculaDistancia(Musica *m, float *mediaPlaylist)
+{
+    float somatorio = 0.0, distancia = 0.0;
+
+    somatorio = pow(mediaPlaylist[0]-m->danceability, 2);
+    somatorio = pow(mediaPlaylist[1]-m->energy, 2);
+    somatorio = pow(mediaPlaylist[2]-m->mode, 2);
+    somatorio = pow(mediaPlaylist[3]-m->speechiness, 2);
+    somatorio = pow(mediaPlaylist[4]-m->acousticness, 2);
+    somatorio = pow(mediaPlaylist[5]-m->instrumentalness, 2);
+    somatorio = pow(mediaPlaylist[6]-m->liveness, 2);
+    somatorio = pow(mediaPlaylist[7]-m->valence, 2);
+
+    distancia = sqrt(somatorio);
+
+    return distancia;
+}

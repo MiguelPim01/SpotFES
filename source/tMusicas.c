@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "tMusicas.h"
 #include "tMusica.h"
@@ -204,10 +205,10 @@ void OrdenaArrayPorDistancia(Musicas *m, float *mediaPlaylist, int *arrayIndices
 
     for (i = 0; i < m->qtdMusicas; i++)
     {
-        distancia1 = CalculaDistancia(mediaPlaylist, m->musicas[i]);
+        distancia1 = CalculaDistancia(m->musicas[i], mediaPlaylist);
         for (j = i+1; j < m->qtdMusicas; j++)
         {
-            distancia2 = CalculaDistancia(mediaPlaylist, m->musicas[j]);
+            distancia2 = CalculaDistancia(m->musicas[j], mediaPlaylist);
             if (distancia1 > distancia2)
             {
                 aux = arrayIndicesMusicas[i];
@@ -218,9 +219,19 @@ void OrdenaArrayPorDistancia(Musicas *m, float *mediaPlaylist, int *arrayIndices
     }
 }
 
+void AtribuiArrayCaracteristicas(Musicas *m, float *mediaPlaylist, int *indices, int qtd)
+{
+    int i;
+
+    for (i = 0; i < qtd; i++) {
+        AdicionaValoresCaracteristicas(m->musicas[indices[i]], mediaPlaylist);
+        for(int i=0; i<8; i++) printf("%.3f \\ ", mediaPlaylist[i]);
+    }
+}
+
 void ImprimeRecomendacoes(Musicas *m, int *arrayIndicesMusicas, int k)
 {
     for (int i = 0; i < k; i++) {
-        ImprimeMusica(m->musicas[arrayIndicesMusicas[k]]);
+        ImprimeMusica(m->musicas[arrayIndicesMusicas[i]]);
     }
 }

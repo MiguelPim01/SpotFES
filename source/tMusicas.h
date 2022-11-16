@@ -44,6 +44,8 @@ void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE
 
 int OrdenaPorFrequenciaERetornaQtd(int *arrayIndices, int qtd);
 
+void AtribuiArrayCaracteristicas(Musicas *m, float *mediaPlaylist, int *indices, int qtd);
+
 void OrdenaArrayPorDistancia(Musicas *m, float *mediaPlaylist, int *arrayIndicesMusicas);
 
 void ImprimeRecomendacoes(Musicas *m, int *arrayIndicesMusicas, int k);

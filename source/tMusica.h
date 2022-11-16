@@ -42,6 +42,8 @@ int RetornaQtdArtistasDaMusica(Musica *m);
 
 void AdicionaValoresCaracteristicas(Musica *m, float *mediaPlaylist);
 
+float CalculaDistancia(Musica *m, float *mediaPlaylist);
+
 void PrintaDadosDaMusicaEArtistas(Musica *musica);
 
 void ImprimeTudoDaMusica(Musica *musica);

@@ -116,17 +116,17 @@ void CalculaMediaPlaylist(Playlist *p, Musicas *m, float *mediaPlaylist)
 {
     int i;
 
-    AdicionaValoresCaracteristicas(m, mediaPlaylist);
+    AtribuiArrayCaracteristicas(m, mediaPlaylist, p->indicesDasMusicas, p->qtdMusicas);
 
     for (i = 0; i < 8; i++)
     {
         mediaPlaylist[i] /= p->qtdMusicas;
     }
-
+    printf("media: ");
     for (i = 0; i < 8; i++)
     {
         if (i) printf(" - ");
-        printf("%.2f", mediaPlaylist[i]);
+        printf("%f", mediaPlaylist[i]);
     }
     printf("\n");
 }

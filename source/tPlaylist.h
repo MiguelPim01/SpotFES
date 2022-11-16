@@ -24,6 +24,8 @@ int RetornaQtdMusicasPlaylist(Playlist *p);
 
 void ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices);
 
-void CalculaMediaPlaylist(Playlist *p, float *mediaPlaylist);
+void CalculaMediaPlaylist(Playlist *p, Musicas *m, float *mediaPlaylist);
+
+void AtribuiArrayCaracteristicas(Musicas *m, float *mediaPlaylist, int *indices, int qtd);
 
 #endif

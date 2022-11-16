@@ -167,6 +167,7 @@ int main(int argc, char *argv[])
                 scanf("%*c");
 
                 RecomendaMusicas(playlists, musicas, indicePlaylist, qtdMusicas);
+
                 break;
 
             // 8 - Gerar relatorio:

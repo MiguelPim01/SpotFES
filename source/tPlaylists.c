@@ -141,12 +141,18 @@ int ObtemTamanhoArrayIndices(Playlists *p)
 
 void RecomendaMusicas(Playlists *p, Musicas *m, int indicePlaylist, int k)
 {
-    int i, j, qtdMusicas = RetornaQtdMusicas(m);
-    float mediaPlaylist[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,}, arrayIndicesMusicas[qtdMusicas];
+    int qtdMusicas = RetornaQtdMusicas(m), arrayIndicesMusicas[qtdMusicas], i;
+    float mediaPlaylist[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
-    CalculaMediaPlaylist(p->playlists[indicePlaylist], mediaPlaylist);
+    // Inicializa array indices de musicas
+    for (i = 0; i < qtdMusicas; i++)
+    {
+        arrayIndicesMusicas[i] = i;
+    }
 
-    // OrdenaArrayPorDistancia(m, mediaPlaylist, arrayIndicesMusicas);
+    CalculaMediaPlaylist(p->playlists[indicePlaylist], m, mediaPlaylist);
+
+    OrdenaArrayPorDistancia(m, mediaPlaylist, arrayIndicesMusicas);
 
     ImprimeRecomendacoes(m, arrayIndicesMusicas, k);
 }
