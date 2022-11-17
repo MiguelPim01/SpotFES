@@ -12,7 +12,7 @@ OBJ=$(C_SOURCE:./source/%.c=./objects/%.o)
 all: $(PROJ_NAME)
 
 $(PROJ_NAME): $(OBJ)
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ $(CFLAGS)
 
 ./objects/%.o: ./source/%.c ./source/%.h
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -21,4 +21,4 @@ $(PROJ_NAME): $(OBJ)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
-	rm -rf ./objects/*.o $(PROJ_NAME)
+	rm -rf ./objects/*.o $(PROJ_NAME) playlists_*.bin relatorio_*.txt

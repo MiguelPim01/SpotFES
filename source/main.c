@@ -78,8 +78,8 @@ int main(int argc, char *argv[])
     }
 
     // Abrindo arquivo relatório
-    sprintf(caminho, "relatorio_%d.txt", aux);
-    pFileRelatorio = fopen(caminho, "w");
+    sprintf(texto, "relatorio_%d.txt", aux);
+    pFileRelatorio = fopen(texto, "w");
 
     printf("==================================\n");
     printf("Selecione uma opção:\n");
@@ -149,6 +149,8 @@ int main(int argc, char *argv[])
                 printf("\nDigite o indice da musica\n--> ");
                 scanf("%d", &indiceMusica);
                 scanf("%*[^\n]");
+
+                scanf("%*c");
 
                 AdicionaMusicaPlaylist(playlists, indiceMusica, indicePlaylist);
                 
