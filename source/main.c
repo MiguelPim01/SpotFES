@@ -194,6 +194,7 @@ int main(int argc, char *argv[])
 
     } // FIM DO WHILE
 
+    sprintf(caminho, "playlists_%d.bin", aux);
     pFilePlaylists = fopen(caminho, "wb");
 
     if (pFilePlaylists == NULL)

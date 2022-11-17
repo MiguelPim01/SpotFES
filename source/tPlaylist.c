@@ -121,5 +121,8 @@ void CalculaMediaPlaylist(Playlist *p, Musicas *m, float *mediaPlaylist)
     for (i = 0; i < 8; i++)
     {
         mediaPlaylist[i] /= p->qtdMusicas;
+        if(i)printf(" - ");
+        printf("%f", mediaPlaylist[i]);
     }
+    printf("\n");
 }

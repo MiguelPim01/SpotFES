@@ -205,15 +205,16 @@ void OrdenaArrayPorDistancia(Musicas *m, float *mediaPlaylist, int *arrayIndices
 
     for (i = 0; i < m->qtdMusicas; i++)
     {
-        distancia1 = CalculaDistancia(m->musicas[i], mediaPlaylist);
-        for (j = i+1; j < m->qtdMusicas; j++)
+        distancia1 = CalculaDistancia(m->musicas[arrayIndicesMusicas[i]], mediaPlaylist);
+        for (j = i + 1; j < m->qtdMusicas; j++)
         {
-            distancia2 = CalculaDistancia(m->musicas[j], mediaPlaylist);
+            distancia2 = CalculaDistancia(m->musicas[arrayIndicesMusicas[j]], mediaPlaylist);
             if (distancia1 > distancia2)
             {
                 aux = arrayIndicesMusicas[i];
                 arrayIndicesMusicas[i] = arrayIndicesMusicas[j];
                 arrayIndicesMusicas[j] = aux;
+                distancia1 = CalculaDistancia(m->musicas[arrayIndicesMusicas[i]], mediaPlaylist);
             }
         }
     }

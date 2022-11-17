@@ -173,14 +173,14 @@ float CalculaDistancia(Musica *m, float *mediaPlaylist)
 {
     float somatorio = 0.0, distancia = 0.0;
 
-    somatorio += pow(mediaPlaylist[0] - m->danceability, 2);
-    somatorio += pow(mediaPlaylist[1] - m->energy, 2);
-    somatorio += pow(mediaPlaylist[2] - m->mode, 2);
-    somatorio += pow(mediaPlaylist[3] - m->speechiness, 2);
-    somatorio += pow(mediaPlaylist[4] - m->acousticness, 2);
-    somatorio += pow(mediaPlaylist[5] - m->instrumentalness, 2);
-    somatorio += pow(mediaPlaylist[6] - m->liveness, 2);
-    somatorio += pow(mediaPlaylist[7] - m->valence, 2);
+    somatorio += pow(m->danceability - mediaPlaylist[0], 2);
+    somatorio += pow(m->energy - mediaPlaylist[1], 2);
+    somatorio += pow(m->mode - mediaPlaylist[2], 2);
+    somatorio += pow(m->speechiness - mediaPlaylist[3], 2);
+    somatorio += pow(m->acousticness - mediaPlaylist[4], 2);
+    somatorio += pow(m->instrumentalness - mediaPlaylist[5], 2);
+    somatorio += pow(m->liveness - mediaPlaylist[6], 2);
+    somatorio += pow(m->valence - mediaPlaylist[7], 2);
 
     distancia = sqrt(somatorio);
 
