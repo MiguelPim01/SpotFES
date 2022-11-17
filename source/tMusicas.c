@@ -225,7 +225,6 @@ void AtribuiArrayCaracteristicas(Musicas *m, float *mediaPlaylist, int *indices,
 
     for (i = 0; i < qtd; i++) {
         AdicionaValoresCaracteristicas(m->musicas[indices[i]], mediaPlaylist);
-        for(int i=0; i<8; i++) printf("%.3f \\ ", mediaPlaylist[i]);
     }
 }
 
