@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 #include "tMusicas.h"
@@ -238,5 +239,9 @@ void ImprimeRecomendacoes(Musicas *m, int *arrayIndicesMusicas, int k)
 
 void RodaMusicaSpotify(Musicas *m, int indiceMusica)
 {
-    printf("xdg-open https://open.spotify.com/track/%s\n", ObtemIdMusica(m->musicas[indiceMusica]));
+    char url[80]="xdg-open https://open.spotify.com/track/";
+
+    strcat(url, ObtemIdMusica(m->musicas[indiceMusica]));
+    
+    system(url);
 }
