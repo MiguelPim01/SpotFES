@@ -50,4 +50,6 @@ void OrdenaArrayPorDistancia(Musicas *m, float *mediaPlaylist, int *arrayIndices
 
 void ImprimeRecomendacoes(Musicas *m, int *arrayIndicesMusicas, int k);
 
+void RodaMusicaSpotify(Musicas *m, int indiceMusica);
+
 #endif

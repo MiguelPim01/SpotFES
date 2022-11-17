@@ -111,6 +111,16 @@ int main(int argc, char *argv[])
                 BuscaIndiceDaMusica(musicas, indiceMusica);
                 
                 // 2.1 - Executar uma musica:
+                printf("Dejesa executar a musica no spotfy?(s/n)\n--> ");
+                scanf("%c", &opcao);
+                scanf("%*[^\n]");
+                scanf("%*c");
+
+                if (opcao == 's')
+                {
+                    RodaMusicaSpotify(musicas, indiceMusica);
+                }
+
                 break;
             
             // 3 - Criar uma playlist:

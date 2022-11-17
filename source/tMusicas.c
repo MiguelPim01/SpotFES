@@ -235,3 +235,8 @@ void ImprimeRecomendacoes(Musicas *m, int *arrayIndicesMusicas, int k)
         ImprimeMusica(m->musicas[arrayIndicesMusicas[i]]);
     }
 }
+
+void RodaMusicaSpotify(Musicas *m, int indiceMusica)
+{
+    printf("xdg-open https://open.spotify.com/track/%s\n", ObtemIdMusica(m->musicas[indiceMusica]));
+}

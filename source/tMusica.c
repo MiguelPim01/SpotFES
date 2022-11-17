@@ -186,3 +186,8 @@ float CalculaDistancia(Musica *m, float *mediaPlaylist)
 
     return distancia;
 }
+
+char *ObtemIdMusica(Musica *musica)
+{
+    return musica->id;
+}

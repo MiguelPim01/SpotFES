@@ -50,4 +50,6 @@ void ImprimeTudoDaMusica(Musica *musica);
 
 void ImprimeMusicaRelatorio(Musica *m, FILE *pFileRelatorio);
 
+char *ObtemIdMusica(Musica *musica);
+
 #endif
