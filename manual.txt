@@ -5,3 +5,5 @@ PARA EXECUTAR O PROGRAMA:
 
 IMPORTANTE:
     Coloque os arquivos de entrada a serem usados dentro da pasta "data"
+
+    O comando "make clean" tambem vai apagar as playlists criadas

@@ -107,6 +107,8 @@ void AdicionaMusicaPlaylist(Playlists *p, int indiceMusica, int indicePlaylist)
 
 void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists)
 {
+    // PADRAO DE ESCRITA NO ARQUIVO [qtd De PLaylists - (qtd De Musicas - indices Das Musicas - tamanho do Nome - Letras Do Nome)...]
+    
     fwrite(&p->qtdPlaylists, sizeof(int), 1, pFilePlaylists);
 
     for (int i = 0; i < p->qtdPlaylists; i++)

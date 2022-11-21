@@ -22,7 +22,7 @@ Musica *LeMusica(char *buffer, int contMusicas)
     char id[70], nome[200], artistas[900], id_artistas[1060], data[50];
     id[0]='\0'; nome[0]='\0'; artistas[0]='\0'; id_artistas[0]='\0'; data[0]='\0'; // Inicializando
     
-    // Fazendo leitura da musica
+    // Fazendo leitura da musica e verificando erros na leitura
     if (sscanf(buffer, "%[^;];%[^;];%d;%d;%d;%[^;];%[^;];%[^;];%f;%f;%d;%f;%d;%f;%f;%f;%f;%f;%f;%d\n", 
         id, nome, &musica->popularity, &musica->duracao_ms, &musica->explicit, artistas, id_artistas, data, 
         &musica->danceability, &musica->energy, &musica->key, &musica->loudness, &musica->mode, &musica->speechiness,
@@ -80,10 +80,6 @@ void LiberaMusica(Musica *musica)
 void ImprimeMusica(Musica *musica)
 {
     printf("id: %s, nome: %s, artistas: %s\n", musica->id, musica->nome, musica->artistas);
-    /*int i, qtd = RetornaQtdArtistasDaMusica(musica);
-    for(i=0; i<qtd; i++) {
-        ImprimeArtista(musica->arrayArtistas[i]);
-    }*/
 }
 
 int ComparaNomeComTexto(Musica *musica, char *texto)
@@ -109,6 +105,13 @@ int RetornaQtdArtistasDaMusica(Musica *m)
 {
     int i=0, cont=0;
 
+    // Se nao houver artistas
+    if (m->id_artistas[i] == '-')
+    {
+        return cont;
+    }
+    
+    // Se houver artistas
     while (m->id_artistas[i] != '\0') 
     {
         if (m->id_artistas[i] == '|') {

@@ -16,14 +16,13 @@ Artista * LeArtista(char *buffer, int contArtista)
     // Aloca espaço para um artista
     Artista *artista = (Artista *)malloc(sizeof(Artista));
 
+    // Leitura e verificação da leitura de artistas
     if (sscanf(buffer, "%[^;];%d.0;%[^;];%[^;];%d\n", id, &artista->numSeguidores, generos, nome, &artista->popularidade) != 5)
     {
         printf("HOUVE UM ERRO NA LEITURA DO ARTISTA! LINHA: %d\n", contArtista);
     }
 
-    // 07MFWYztDF2wq4U91e4mgg;44.0;-;Louis Armstrong Hot Seven;Carroll Dickerson Orchestra;0
-    // 0SZjEe5ez2iiSUatjjaQGT;2653.0;-;Kumar Sanu;Alka Yagnik;Kavita Krishnamurti;12
-
+    // Atribuindo id, generos e nome ao artista
     FinalizaArtista(artista, id, generos, nome);
 
     return artista;
@@ -42,13 +41,6 @@ void FinalizaArtista(Artista *artista, char *id, char *generos, char *nome)
     strncpy(artista->id, id, tamID);
     strncpy(artista->generos, generos, tamGeneros);
     strncpy(artista->nome, nome, tamNome);
-}
-
-int IdIgualAoArtista(Artista *a, char *id) {   
-    if (strncmp(id, a->id, strlen(id)) == 0) {
-        return 0;
-    }
-    return 1;
 }
 
 void LiberaArtista(Artista *a)

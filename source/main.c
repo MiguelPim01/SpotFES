@@ -206,6 +206,7 @@ int main(int argc, char *argv[])
 
     } // FIM DO WHILE
 
+    // Escrevendo/Salvando no arquivo binario de playlists
     pFilePlaylists = fopen(caminho, "wb");
 
     if (pFilePlaylists == NULL)

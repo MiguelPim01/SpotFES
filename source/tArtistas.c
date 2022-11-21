@@ -55,16 +55,6 @@ void LiberaArtistas(Artistas *a)
     free(a);
 }
 
-void ImprimeDadosDosArtistas(Artistas *a)
-{
-    int i;
-    for (i = 0; i < a->qtdArtistas; i++)
-    {
-        ImprimeArtista(a->artistas[i]);
-        printf("\n");
-    }
-}
-
 Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a, int qtdArtistasMusica)
 {
     int i=0, cont=0;
@@ -78,14 +68,15 @@ Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a,
     // Varrer o array de artistas
     for (i = 0; i < a->qtdArtistas; i++)
     {
+        // Verifica se existe o id do artista nos id's de artistas da musica
         aux = strstr(id_artistas, ObtemIdArtista(a->artistas[i]));
 
-        if (aux != NULL)
+        if (aux != NULL) // Se existir entra no if
         {
             arrayArtistas[cont] = a->artistas[i];
             cont++;
         }
-        if (cont == qtdArtistasMusica)
+        if (cont == qtdArtistasMusica) // Se o cont se igualar a quantidade alocada para aquela musica o break é feito
         {
             break;
         }

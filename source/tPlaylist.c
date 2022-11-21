@@ -81,7 +81,7 @@ void AdicionaMusica(Playlist *playlist, int indiceMusica)
 }
 
 void EscrevePlaylistBin(Playlist *playlist, FILE *pFilePlaylists)
-{
+{   
     fwrite(&playlist->qtdMusicas, sizeof(int), 1, pFilePlaylists);
 
     for (int i = 0; i < playlist->qtdMusicas; i++)

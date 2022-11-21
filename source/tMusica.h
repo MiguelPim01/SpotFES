@@ -36,8 +36,14 @@ int ComparaNomeComTexto(Musica *musica, char *texto);
  */
 int ComparaIdComTexto(Musica *musica, char *texto);
 
+/*
+ * Atribui os ponteiros de artista a suas devidas musicas
+ */
 void AtribuiArtistasAMusica(Musica *musica, Artistas *a);
 
+/*
+ * Retorna quantidade de artistas de uma musica
+ */
 int RetornaQtdArtistasDaMusica(Musica *m);
 
 void AdicionaValoresCaracteristicas(Musica *m, float *mediaPlaylist);
