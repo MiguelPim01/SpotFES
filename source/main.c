@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
     // Abrindo arquivos de playlists
     sscanf(argv[1], "data/artists_%s", aux);
-    sprintf(caminho, "playlists_%s.bin", aux);
+    sprintf(caminho, "playlists/playlist_%s.bin", aux);
     pFilePlaylists = fopen(caminho, "rb");
 
     if (pFilePlaylists == NULL)

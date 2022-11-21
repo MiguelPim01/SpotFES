@@ -21,4 +21,4 @@ $(PROJ_NAME): $(OBJ)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
-	rm -rf ./objects/*.o $(PROJ_NAME) playlists_*.bin relatorio_*.txt
+	rm -rf ./objects/*.o $(PROJ_NAME) playlists_*.bin
