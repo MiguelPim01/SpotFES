@@ -22,10 +22,4 @@ Artista **ObtemArtistas(Artista **arrayArtistas, char *id_artistas, Artistas *a,
 
 void ImprimeVetorDeArtistas(Artista **arrayArtistas, int qtdArtistas);
 
-int OrdenaPorFrequenciaERetornaQtd(int *arrayIndices, int qtd);
-
-void PoeIndiceDeUmArtistaNaArray(Artistas *as, Artista *a, int *arrayIndicesArtistas);
-
-void ImprimeArtistasOrdenados(Artistas *a, int *arrayIndicesArtistas, int qtdMaxArtistas, FILE *pFileRelatorioA);
-
 #endif

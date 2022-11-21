@@ -1,0 +1,7 @@
+PARA EXECUTAR O PROGRAMA:
+    ./prog <file-artistas> <file-musicas>
+
+    OBS: Devem ser dados sem as suas extensões, por exemplo, sem o ".csv"
+
+IMPORTANTE:
+    Coloque os arquivos de entrada a serem usados dentro da pasta "data"

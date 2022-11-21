@@ -52,8 +52,4 @@ void ImprimeMusicaRelatorio(Musica *m, FILE *pFileRelatorio);
 
 char *ObtemIdMusica(Musica *musica);
 
-int RetornaQtdArtistasMusica(Musica *musica);
-
-void PoeIndicesArtistasArray(Musica *m, Artistas *a, int *arrayIndicesArtistas);
-
 #endif

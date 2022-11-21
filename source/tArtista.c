@@ -21,6 +21,9 @@ Artista * LeArtista(char *buffer, int contArtista)
         printf("HOUVE UM ERRO NA LEITURA DO ARTISTA! LINHA: %d\n", contArtista);
     }
 
+    // 07MFWYztDF2wq4U91e4mgg;44.0;-;Louis Armstrong Hot Seven;Carroll Dickerson Orchestra;0
+    // 0SZjEe5ez2iiSUatjjaQGT;2653.0;-;Kumar Sanu;Alka Yagnik;Kavita Krishnamurti;12
+
     FinalizaArtista(artista, id, generos, nome);
 
     return artista;
@@ -67,9 +70,4 @@ void ImprimeArtista(Artista *artista)
 char *ObtemIdArtista(Artista *artista)
 {
     return artista->id;
-}
-
-void ImprimeArtistaRelatorio(Artista *artista, FILE *pFileRelatorioA)
-{
-    fprintf(pFileRelatorioA, "id: %s, nome: %s, Seguidores: %d, generos: %s, popularidade: %d\n", artista->id,  artista->nome, artista->numSeguidores, artista->generos, artista->popularidade);
 }

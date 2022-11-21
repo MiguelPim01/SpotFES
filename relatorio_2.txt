@@ -1,6 +1,0 @@
-id: 5dQZbRbOMahlP55xeL0mNW, nome: Fall, artistas: Justin Bieber
-id: 2ue1KRstSKHF8jQkIJZiNC, nome: It's Only Love - Remastered 2009, artistas: The Beatles
-id: 4joiWvli4qJVEW6qZV2i2J, nome: All My Loving - Remastered 2009, artistas: The Beatles
-id: 1h04XMpzGzmAudoI6VHBgA, nome: Penny Lane - Remastered 2009, artistas: The Beatles
-id: 0ESIjVxnDnCDaTPo6sStHm, nome: Till There Was You - Remastered 2009, artistas: The Beatles
-id: 2iIRl5jf9beA2ExZWzn2nt, nome: Lucy In The Sky With Diamonds - Remix, artistas: The Beatles

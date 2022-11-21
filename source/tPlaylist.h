@@ -22,10 +22,6 @@ void EscrevePlaylistBin(Playlist *playlist, FILE *pFilePlaylists);
 
 int RetornaQtdMusicasPlaylist(Playlist *p);
 
-int RetornaQtdMaxArtistasPlaylist(Playlist *p, Musicas *m);
-
-void ObtemIndiceArtistasPlaylist(Playlist *p, Musicas *m, Artistas *a, int *arrayIndicesArtistas);
-
 void ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices);
 
 void CalculaMediaPlaylist(Playlist *p, Musicas *m, float *mediaPlaylist);

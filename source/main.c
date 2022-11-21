@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-    FILE *pFileMusicas, *pFileArtistas, *pFilePlaylists, *pFileRelatorioM, *pFileRelatorioA;
+    FILE *pFileMusicas, *pFileArtistas, *pFilePlaylists, *pFileRelatorio;
     Artistas *artistas;
     Musicas *musicas;
     char caminho[500];
@@ -58,13 +58,13 @@ int main(int argc, char *argv[])
 
     // FUNCIONAMENTO DO PROGRAMA:
 
-    int flagBreak=0, indiceMusica=0, indicePlaylist=0, qtdMusicas=0, aux;
-    char opcao, texto[100];
+    int flagBreak=0, indiceMusica=0, indicePlaylist=0, qtdMusicas=0;
+    char opcao, texto[100], aux[20];
     Playlists *playlists;
 
     // Abrindo arquivos de playlists
-    sscanf(argv[1], "data/artists_%d", &aux);
-    sprintf(caminho, "playlists_%d.bin", aux);
+    sscanf(argv[1], "data/artists_%s", aux);
+    sprintf(caminho, "playlists_%s.bin", aux);
     pFilePlaylists = fopen(caminho, "rb");
 
     if (pFilePlaylists == NULL)
@@ -76,11 +76,10 @@ int main(int argc, char *argv[])
         playlists = CarregaArquivoPlaylists(pFilePlaylists);
         fclose(pFilePlaylists);
     }
-    sprintf(texto, "relatorio/musicas_%d.txt", aux);
-    pFileRelatorioM = fopen(texto, "w");
 
-    sprintf(texto, "relatorio/artistas_%d.txt", aux);
-    pFileRelatorioA = fopen(texto, "w");
+    // Abrindo arquivo relatório
+    sprintf(texto, "relatorios/relatorio_%s.txt", aux);
+    pFileRelatorio = fopen(texto, "w");
 
     printf("==================================\n");
     printf("Selecione uma opção:\n");
@@ -185,7 +184,7 @@ int main(int argc, char *argv[])
 
             // 8 - Gerar relatorio:
             case '8':
-                GerarRelatorio(playlists, musicas, artistas, pFileRelatorioM, pFileRelatorioA);
+                GerarRelatorio(playlists, musicas, artistas, pFileRelatorio);
                 flagBreak = 1;
                 break;
             
@@ -219,9 +218,8 @@ int main(int argc, char *argv[])
         fclose(pFilePlaylists);
     }
 
-    fclose(pFileRelatorioM);
-    fclose(pFileRelatorioA);
-    
+    fclose(pFileRelatorio);
+
     // Liberar espaço da memoria
     LiberaMusicas(musicas);
     LiberaArtistas(artistas);

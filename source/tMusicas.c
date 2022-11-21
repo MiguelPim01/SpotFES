@@ -122,14 +122,19 @@ void RelacionaArraysMusicasEArtistas(Musicas *m, Artistas *a)
 
 void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE *pFileRelatorio)
 {
-    int i, qtdMusicasSaida;
+    int i, qtdMusicasSaida, arrayIndicesMusicas[qtdMusicas];
 
-    qtdMusicasSaida = OrdenaPorFrequenciaERetornaQtd(arrayIndices, qtdMusicas);
+    for (i = 0; i < qtdMusicas; i++)
+    {
+        arrayIndicesMusicas[i] = arrayIndices[i];
+    }
+
+    qtdMusicasSaida = OrdenaPorFrequenciaERetornaQtd(arrayIndicesMusicas, qtdMusicas);
 
     //Imprime as musicas em ordem
     for (i = 0; i < qtdMusicasSaida; i++)
     {
-        ImprimeMusicaRelatorio(m->musicas[arrayIndices[i]], pFileRelatorio);
+        ImprimeMusicaRelatorio(m->musicas[arrayIndicesMusicas[i]], pFileRelatorio);
     }
 }
 
@@ -239,16 +244,4 @@ void RodaMusicaSpotify(Musicas *m, int indiceMusica)
     strcat(url, ObtemIdMusica(m->musicas[indiceMusica]));
     
     system(url);
-}
-
-int ObtemQtdArtistasMusica(Musicas *m, int indice)
-{
-    int qtd = RetornaQtdArtistasMusica(m->musicas[indice]);
-
-    return qtd;
-}
-
-void ObtemMusicaParaPorArtistasNaArray(Musicas *m, Artistas *a, int indice, int *arrayIndicesArtistas)
-{
-    PoeIndicesArtistasArray(m->musicas[indice], a, arrayIndicesArtistas);
 }
