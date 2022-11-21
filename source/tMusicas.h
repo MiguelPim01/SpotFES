@@ -40,9 +40,7 @@ void RelacionaArraysMusicasEArtistas(Musicas *m, Artistas *as);
 
 int RetornaQtdMusicas(Musicas *m);
 
-void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE *pFileRelatorio);
-
-int OrdenaPorFrequenciaERetornaQtd(int *arrayIndices, int qtd);
+void ImprimeMusicasOrdenadas(Musicas *m, int *arrayIndices, int qtdMusicas, FILE *pFileRelatorioM);
 
 void AtribuiArrayCaracteristicas(Musicas *m, float *mediaPlaylist, int *indices, int qtd);
 
@@ -51,5 +49,9 @@ void OrdenaArrayPorDistancia(Musicas *m, float *mediaPlaylist, int *arrayIndices
 void ImprimeRecomendacoes(Musicas *m, int *arrayIndicesMusicas, int k);
 
 void RodaMusicaSpotify(Musicas *m, int indiceMusica);
+
+int ObtemQtdArtistasMusica(Musicas *m, int indice);
+
+void ObtemMusicaParaPorArtistasNaArray(Musicas *m, Artistas *a, int indice, int *arrayIndicesArtistas);
 
 #endif

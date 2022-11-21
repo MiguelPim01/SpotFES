@@ -27,4 +27,6 @@ void ImprimeArtista(Artista *artista);
 
 char *ObtemIdArtista(Artista *artista);
 
+void ImprimeArtistaRelatorio(Artista *a, FILE *pFileRelatorioA);
+
 #endif

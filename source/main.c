@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-    FILE *pFileMusicas, *pFileArtistas, *pFilePlaylists, *pFileRelatorio;
+    FILE *pFileMusicas, *pFileArtistas, *pFilePlaylists, *pFileRelatorioM, *pFileRelatorioA;
     Artistas *artistas;
     Musicas *musicas;
     char caminho[500];
@@ -76,10 +76,11 @@ int main(int argc, char *argv[])
         playlists = CarregaArquivoPlaylists(pFilePlaylists);
         fclose(pFilePlaylists);
     }
+    sprintf(texto, "relatorio/musicas_%d.txt", aux);
+    pFileRelatorioM = fopen(texto, "w");
 
-    // Abrindo arquivo relatório
-    sprintf(texto, "relatorio_%d.txt", aux);
-    pFileRelatorio = fopen(texto, "w");
+    sprintf(texto, "relatorio/artistas_%d.txt", aux);
+    pFileRelatorioA = fopen(texto, "w");
 
     printf("==================================\n");
     printf("Selecione uma opção:\n");
@@ -184,7 +185,7 @@ int main(int argc, char *argv[])
 
             // 8 - Gerar relatorio:
             case '8':
-                GerarRelatorio(playlists, musicas, artistas, pFileRelatorio);
+                GerarRelatorio(playlists, musicas, artistas, pFileRelatorioM, pFileRelatorioA);
                 flagBreak = 1;
                 break;
             
@@ -218,8 +219,9 @@ int main(int argc, char *argv[])
         fclose(pFilePlaylists);
     }
 
-    fclose(pFileRelatorio);
-
+    fclose(pFileRelatorioM);
+    fclose(pFileRelatorioA);
+    
     // Liberar espaço da memoria
     LiberaMusicas(musicas);
     LiberaArtistas(artistas);

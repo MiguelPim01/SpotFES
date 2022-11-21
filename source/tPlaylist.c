@@ -102,13 +102,26 @@ int RetornaQtdMusicasPlaylist(Playlist *p)
     return p->qtdMusicas;
 }
 
+int RetornaQtdMaxArtistasPlaylist(Playlist *p, Musicas *m)
+{
+    int i, qtd = 0;
+
+    for (i = 0; i < p->qtdMusicas; i++)
+    {
+        qtd += ObtemQtdArtistasMusica(m, p->indicesDasMusicas[i]);
+    }
+
+    return qtd;
+}
+
 void ObtemMusicasDaPlaylist(Playlist *p, int *arrayIndices)
 {
-    static int k=0;
+    static int posicao = 0;
 
-    for (int i = 0; i < p->qtdMusicas; i++, k++)
+    for (int i = 0; i < p->qtdMusicas; i++)
     {
-        arrayIndices[k] = p->indicesDasMusicas[i];
+        arrayIndices[posicao] = p->indicesDasMusicas[i];
+        posicao++;
     }
 }
 
@@ -121,8 +134,16 @@ void CalculaMediaPlaylist(Playlist *p, Musicas *m, float *mediaPlaylist)
     for (i = 0; i < 8; i++)
     {
         mediaPlaylist[i] /= p->qtdMusicas;
-        if(i)printf(" - ");
-        printf("%f", mediaPlaylist[i]);
     }
     printf("\n");
+}
+
+void ObtemIndiceArtistasPlaylist(Playlist *p, Musicas *m, Artistas *a, int *arrayIndicesArtistas)
+{
+    int i;
+
+    for (i = 0; i < p->qtdMusicas; i++)
+    {
+        ObtemMusicaParaPorArtistasNaArray(m, a, p->indicesDasMusicas[i], arrayIndicesArtistas);
+    }
 }

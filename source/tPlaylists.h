@@ -26,6 +26,6 @@ void RecomendaMusicas(Playlists *p, Musicas *m, int indicePlaylist, int k);
 
 void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists);
 
-void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio);
+void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorioM, FILE *pFileRelatorioA);
 
 #endif

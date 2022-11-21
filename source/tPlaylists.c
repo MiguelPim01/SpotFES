@@ -115,30 +115,6 @@ void SalvaPlaylists(Playlists *p, FILE *pFilePlaylists)
     }
 }
 
-void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorio)
-{
-    int tam = ObtemTamanhoArrayIndices(p);
-    int arrayIndices[tam];
-
-    for (int i = 0; i < p->qtdPlaylists; i++)
-    {
-        ObtemMusicasDaPlaylist(p->playlists[i], arrayIndices);
-    }
-    ImprimeMusicasOrdenadas(m, arrayIndices, tam, pFileRelatorio);
-}
-
-int ObtemTamanhoArrayIndices(Playlists *p)
-{
-    int i, tam = 0;
-
-    for (i = 0; i < p->qtdPlaylists; i++)
-    {
-        tam += RetornaQtdMusicasPlaylist(p->playlists[i]);
-    }
-
-    return tam;
-}
-
 void RecomendaMusicas(Playlists *p, Musicas *m, int indicePlaylist, int k)
 {
     int qtdMusicas = RetornaQtdMusicas(m), arrayIndicesMusicas[qtdMusicas], i;
@@ -155,4 +131,55 @@ void RecomendaMusicas(Playlists *p, Musicas *m, int indicePlaylist, int k)
     OrdenaArrayPorDistancia(m, mediaPlaylist, arrayIndicesMusicas);
 
     ImprimeRecomendacoes(m, arrayIndicesMusicas, k);
+}
+
+void GerarRelatorio(Playlists *p, Musicas *m, Artistas *a, FILE *pFileRelatorioM, FILE *pFileRelatorioA)
+{
+    // Relatório das músicas
+    int i, qtdMusicas = 0;
+
+    for (i = 0; i < p->qtdPlaylists; i++)
+    {
+        // Obter a quantidade de músicas na playlist para ser o tamanho do vetor
+        qtdMusicas += RetornaQtdMusicasPlaylist(p->playlists[i]);
+    }
+
+    int arrayIndicesMusicas[qtdMusicas];
+
+    for (i = 0; i < p->qtdPlaylists; i++)
+    {
+        // Preenche vetor com índices das músicas que estão na playlist
+        ObtemMusicasDaPlaylist(p->playlists[i], arrayIndicesMusicas);
+    }
+    ImprimeMusicasOrdenadas(m, arrayIndicesMusicas, qtdMusicas, pFileRelatorioM);
+
+    // Relatório dos artistas
+    int qtdMaxArtistas = 0;
+
+    for (i = 0; i < p->qtdPlaylists; i++)
+    {
+        // Obter a quantidade máxima possível de artistas para ser o tamanho máximo do vetor
+        qtdMaxArtistas += RetornaQtdMaxArtistasPlaylist(p->playlists[i], m);
+    }
+
+    int arrayIndicesArtistas[qtdMaxArtistas];
+    printf("qtd: %d\n", qtdMaxArtistas);
+
+    for (i = 0; i < p->qtdPlaylists; i++)
+    {
+        // Preenche vetor com índices dos artistas que estão na playlist
+        ObtemIndiceArtistasPlaylist(p->playlists[i], m, a, arrayIndicesArtistas);
+    }
+    for (i = 0; i < qtdMaxArtistas; i++)
+    {
+        if (i) printf(" \\ ");
+        printf("%d", arrayIndicesArtistas[i]);
+    }
+    // Ordena array de forma decrescente e o imprime
+    ImprimeArtistasOrdenados(a, arrayIndicesArtistas, qtdMaxArtistas, pFileRelatorioA);
+    for (i = 0; i < qtdMaxArtistas; i++)
+    {
+        if (i) printf(" \\ "); else printf("\n");
+        printf("%d", arrayIndicesArtistas[i]);
+    }
 }

@@ -113,3 +113,36 @@ void ImprimeVetorDeArtistas(Artista **arrayArtistas, int qtdArtistas)
         ImprimeArtista(arrayArtistas[i]);
     }
 }
+
+void PoeIndiceDeUmArtistaNaArray(Artistas *as, Artista *a, int *arrayIndicesArtistas)
+{
+    static int posicao = 0;
+
+    for (int i = 0; i < as->qtdArtistas; i++)
+    {
+        if (IdIgualAoArtista(a, ObtemIdArtista(as->artistas[i])))
+        {
+            arrayIndicesArtistas[posicao] = i;
+            printf("posicao: %d\nindice: %d\n", posicao, arrayIndicesArtistas[posicao]);
+            posicao++;
+        }
+    }
+}
+
+void ImprimeArtistasOrdenados(Artistas *a, int *arrayIndicesArtistas, int qtdMaxArtistas, FILE *pFileRelatorioA)
+{
+    int i, qtdArtistasSaida;
+
+    qtdArtistasSaida = OrdenaPorFrequenciaERetornaQtd(arrayIndicesArtistas, qtdMaxArtistas);
+
+    printf("\n%d\n", qtdArtistasSaida);
+    for (i = 0; i < qtdArtistasSaida; i++)
+    {
+        if (i) printf(" \\ ");
+        printf("%d", arrayIndicesArtistas[i]);
+    }
+    for (i = 0; i < qtdArtistasSaida; i++)
+    {
+        ImprimeArtistaRelatorio(a->artistas[arrayIndicesArtistas[i]], pFileRelatorioA);
+    }
+}

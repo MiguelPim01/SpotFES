@@ -191,3 +191,19 @@ char *ObtemIdMusica(Musica *musica)
 {
     return musica->id;
 }
+
+int RetornaQtdArtistasMusica(Musica *musica)
+{
+    return musica->qtdArtistas;
+}
+
+void PoeIndicesArtistasArray(Musica *m, Artistas *a, int *arrayIndicesArtistas)
+{
+    int i;
+
+    for (i = 0; i < m->qtdArtistas; i++)
+    {
+        PoeIndiceDeUmArtistaNaArray(a, m->arrayArtistas[i], arrayIndicesArtistas);
+    }
+
+}
